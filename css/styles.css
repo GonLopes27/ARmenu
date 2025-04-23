@@ -1,16 +1,93 @@
 button {
-    padding: 12px 20px;
-    margin: 0 10px;
-    font-size: 1rem;
-    background-color: #4caf50;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  button:hover {
-    background-color: #3e8e41;
-  }
-  
+  padding: 12px 20px;
+  margin: 0 10px;
+  font-size: 1rem;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #3e8e41;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  padding: 1rem;
+  background: #f8f8f8;
+}
+
+header h1 {
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+nav ul {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  list-style: none;
+  margin-bottom: 1rem;
+}
+
+nav li {
+  padding: 0.5rem 1rem;
+  border-radius: 2rem;
+  background: #eee;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+nav li.active {
+  color: #fff;
+  background-color: #ff6600;
+}
+
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 1rem;
+}
+
+.dish-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 1rem;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+  text-align: center;
+}
+
+.dish-card img {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+}
+
+.dish-card .info {
+  margin: 0.5rem 0;
+}
+
+.dish-card .price {
+  color: #ff6600;
+  font-weight: bold;
+}
+
+button {
+  background: #ff6600;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+}
