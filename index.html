@@ -1,55 +1,34 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Project Menu</title>
-
-  <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
-  <link rel="stylesheet" href="styles/styles.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Menu</title>
+  <link rel="stylesheet" href="css/style.css">
 </head>
-
 <body>
-  <h1>Welcome to Project Menu</h1>
+  <header>
+    <h1>RESTAURANTE</h1>
+    <nav>
+      <ul>
+        <li class="active">Tudo</li>
+        <li>Carne</li>
+        <li>Peixe</li>
+        <li>Sobremesas</li>
+      </ul>
+    </nav>
+  </header>
 
-  <model-viewer 
-    id="dishViewer"
-    src="./assets/models/Duck.glb"
-    ios-src="./assets/models/Duck.usdz"
-    alt="3D Dish"
-    ar
-    ar-modes="scene-viewer webxr quick-look"
-    auto-rotate
-    camera-controls
-    style="width: 100%; height: 500px;">
-  </model-viewer>
-
-  <div style="text-align: center; margin-top: 20px;">
-    <button onclick="useFallback()"> Fallback AR </button>
-  </div>
-
-  <script>
-    const viewer = document.getElementById('dishViewer');
-
-    function launchAR() {
-      if (viewer.canActivateAR) {
-        viewer.activateAR();
-      } else {
-        alert("This device does not support AR mode.");
-      }
-    }
-
-    function useFallback() {
-      window.location.href = "fallback-ar.html";
-    }
-
-    // Optional automatic fallback if AR fails
-    viewer.addEventListener('ar-status', (event) => {
-      if (event.detail.status === 'failed') {
-        console.warn("AR failed. Redirecting to fallback...");
-        // window.location.href = "fallback-ar.html";
-      }
-    });
-  </script>
+  <main class="menu-grid">
+    <div class="dish-card">
+      <img src="assets/images/hamburguer.jpg" alt="Hamburguer">
+      <div class="info">
+        <h3>Hambúrguer</h3>
+        <span class="price">9,00€</span>
+      </div>
+      <button onclick="location.href='dish-detail.html'">Ver Modelo 3D</button>
+    </div>
+    <!-- Repeat dish-card as needed -->
+  </main>
 </body>
 </html>
