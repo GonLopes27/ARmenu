@@ -111,9 +111,10 @@ header {
 }
 
 .back-btn {
-  font-size: 1.5rem;
+  font-size: 4%;
   text-decoration: none;
   color: #ff6600;
+  padding-bottom: 0.5rem;
 }
 
 .info {
