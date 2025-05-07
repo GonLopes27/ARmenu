@@ -95,13 +95,13 @@ button {
 
 .titleR {
   font-family: "Lucida Handwriting", cursive;
+  font-size: 3rem;
   margin: 0.7em 0.7em;
 }
 
 .categoryBtns {
   display: flex;
   justify-content: center;
-  gap: 0.5rem;
   margin-bottom: 1rem;
 }
 
