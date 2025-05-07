@@ -1,41 +1,32 @@
 <!DOCTYPE html>
-<html lang="pt">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Hambúrguer</title>
-  <link rel="stylesheet" href="css/styles.css" />
+  <title>Test</title>
+
   <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+  <link rel="stylesheet" href="css/styles.css" />
 </head>
 
-<body class="dish-page">
-  <header>
-    <a href="index.html" class="back-btn">←</a>
-    <h2>Hambúrguer</h2>
-  </header>
+<body>
+  <h1>Model Test</h1>
 
   <model-viewer 
     id="dishViewer"
     src="./assets/models/Duck.glb"
     ios-src="./assets/models/Duck.usdz"
-    alt="3D Hambúrguer"
+    alt="3D Dish"
     ar
     ar-modes="scene-viewer webxr quick-look"
     auto-rotate
     camera-controls
-    style="width: 100%; height: 300px;">
+    style="width: 100%; height: 500px;">
   </model-viewer>
 
-  <section class="info">
-    <div class="top-row">
-      <h3>Hambúrguer</h3>
-      <span class="price">9,00€</span>
-    </div>
-    <p class="description">
-      Os nossos hambúrgueres são feitos com carne de vaca fresca, grelhada no momento, servidos em pão brioche leve e fatiado. Pode personalizar com bacon, ovo ou queijo cheddar ao gosto de cada cliente.
-    </p>
-    <button class="ar-btn" onclick="launchAR()">Ver Modelo 3D</button>
-  </section>
+  <div style="text-align: center; margin-top: 20px;">
+    <button onclick="useFallback()"> Fallback AR </button>
+  </div>
 
   <script>
     const viewer = document.getElementById('dishViewer');
@@ -44,9 +35,21 @@
       if (viewer.canActivateAR) {
         viewer.activateAR();
       } else {
-        alert("Este dispositivo não suporta AR nativa. Use o botão Fallback.");
+        alert("This device does not support AR mode.");
       }
     }
+
+    function useFallback() {
+      window.location.href = "fallback-ar.html";
+    }
+
+    // Optional automatic fallback if AR fails
+    viewer.addEventListener('ar-status', (event) => {
+      if (event.detail.status === 'failed') {
+        console.warn("AR failed. Redirecting to fallback...");
+        // window.location.href = "fallback-ar.html";
+      }
+    });
   </script>
 </body>
 </html>
