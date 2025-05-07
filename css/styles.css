@@ -1,3 +1,4 @@
+/* Menu */
 button {
   padding: 12px 20px;
   margin: 0 10px;
@@ -97,7 +98,14 @@ button {
   margin: 0.7em 0.7em;
 }
 
-/* Dish Details*/
+.categoryBtns {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+/* Dish Details */
 .dish-page {
   font-family: 'Segoe UI', sans-serif;
   padding: 1rem;
