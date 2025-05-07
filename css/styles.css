@@ -114,7 +114,8 @@ header {
   font-size: 3rem;
   text-decoration: none;
   color: #ff6600;
-  padding-bottom: 1.5rem;
+  padding-bottom: 1.3rem;
+  font-weight: bold;
 }
 
 .info {
