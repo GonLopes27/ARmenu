@@ -96,3 +96,55 @@ button {
   font-family: "Lucida Handwriting", cursive;
   margin: 0.7em 0.7em;
 }
+
+/* Dish Details*/
+.dish-page {
+  font-family: 'Segoe UI', sans-serif;
+  padding: 1rem;
+  background: #fff;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.back-btn {
+  font-size: 1.5rem;
+  text-decoration: none;
+  color: #ff6600;
+}
+
+.info {
+  margin-top: 1rem;
+}
+
+.top-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.price {
+  color: #ff6600;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.description {
+  margin: 1rem 0;
+  color: #444;
+}
+
+.ar-btn {
+  display: block;
+  width: 100%;
+  background: #ff6600;
+  color: white;
+  padding: 0.75rem;
+  border: none;
+  border-radius: 12px;
+  font-size: 1rem;
+  cursor: pointer;
+}
