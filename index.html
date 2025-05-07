@@ -11,35 +11,25 @@
 <body>
     <header style="display: block;">
         <h1 class="titleR">-- Menu --</h1>
-        <nav>
-            <ul>
+        <nav id="category-buttons">
+            <button onclick="filterDishes('all')">Tudo</button>
+            <button onclick="filterDishes('carne')">Carne</button>
+            <button onclick="filterDishes('peixe')">Peixe</button>
+            <button onclick="filterDishes('sobremesa')">Sobremesas</button>
+
+            <!-- <ul>
                 <li class="active" onclick="location.href='index.html'">Tudo</li>
                 <li onclick="location.href='carne.html'">Carne</li>
                 <li onclick="location.href='peixe.html'">Peixe</li>
                 <li onclick="location.href='sobremesa.html'">Sobremesas</li>
-            </ul>
+            </ul> -->
         </nav>
     </header>
 
-    <main class="menu-grid">
-        <div class="dish-card">
-            <img src="assets/images/Duck.png" alt="Duck">
-            <div class="info">
-                <h3>Duck</h3>
-                <span class="price">9,00€</span>
-            </div>
-            <button onclick="location.href='test.html'">Ver Modelo 3D</button>
-        </div>
-        <div class="dish-card">
-            <img src="assets/images/Duck.png" alt="Duck">
-            <div class="info">
-                <h3>Duck</h3>
-                <span class="price">9,00€</span>
-            </div>
-            <button onclick="location.href='details.html'">Ver Modelo 3D</button>
-        </div>
-        <!-- Repeat card -->
-    </main>
+
+    <main id="dish-container"></main>
+
+    <script src="script/script.js"></script>
 </body>
 
 </html>
