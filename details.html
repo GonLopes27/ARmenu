@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="pt">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Hambúrguer</title>
+  <title></title>
   <link rel="stylesheet" href="css/styles.css" />
   <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
 </head>
@@ -11,42 +12,52 @@
 <body class="dish-page">
   <header>
     <a href="index.html" class="back-btn">←</a>
-    <h2>Hambúrguer</h2>
+    <h2></h2>
   </header>
 
-  <model-viewer 
-    id="dishViewer"
-    src="./assets/models/Duck.glb"
-    ios-src="./assets/models/Duck.usdz"
-    alt="3D Hambúrguer"
-    ar
-    ar-modes="scene-viewer webxr quick-look"
-    auto-rotate
-    camera-controls
+  <model-viewer id="dishViewer" alt="3D Dish" ar ar-modes="scene-viewer webxr quick-look" auto-rotate camera-controls
     style="width: 100%; height: 300px;">
   </model-viewer>
 
   <section class="info">
     <div class="top-row">
-      <h3>Hambúrguer</h3>
-      <span class="price">9,00€</span>
+      <h3></h3>
+      <span class="price"></span>
     </div>
-    <p class="description">
-      Os nossos hambúrgueres são feitos com carne de vaca fresca, grelhada no momento, servidos em pão brioche leve e fatiado. Pode personalizar com bacon, ovo ou queijo cheddar ao gosto de cada cliente.
-    </p>
+    <p class="description"></p>
     <button class="ar-btn" onclick="launchAR()">Ver Modelo 3D</button>
   </section>
 
+  <script src="script/script.js"></script>
   <script>
-    const viewer = document.getElementById('dishViewer');
+    const urlParams = new URLSearchParams(window.location.search);
+    const dishID = urlParams.get("dish");
+    const dish = dishes.find(d => d.id === dishID);
+
+    if (!dish) {
+      document.body.innerHTML = "<p>Prato não encontrado.</p>";
+    } else {
+      document.title = dish.name;
+      document.querySelector("h2").textContent = dish.name;
+      document.querySelector("h3").textContent = dish.name;
+      document.querySelector(".price").textContent = dish.price;
+      document.querySelector(".description").textContent = dish.description;
+
+      const viewer = document.getElementById("dishViewer");
+      viewer.setAttribute("src", dish.modelGLB);
+      viewer.setAttribute("ios-src", dish.modelUSDZ);
+    }
 
     function launchAR() {
+      const viewer = document.getElementById('dishViewer');
       if (viewer.canActivateAR) {
         viewer.activateAR();
       } else {
-        alert("Este dispositivo não suporta AR nativa. Use o botão Fallback.");
+        alert("Este dispositivo não suporta AR nativa.");
       }
     }
   </script>
+
 </body>
+
 </html>

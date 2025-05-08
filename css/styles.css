@@ -106,6 +106,17 @@ button {
   margin-bottom: 1rem;
 }
 
+.view-3d-btn {
+  display: inline-block;
+  background: #ff6600;
+  color: white;
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: bold;
+  margin-top: 0.5rem;
+}
+
 /* Dish Details */
 .dish-page {
   font-family: 'Segoe UI', sans-serif;
