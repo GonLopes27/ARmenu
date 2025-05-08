@@ -65,6 +65,7 @@ nav li.active {
   padding: 1rem;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
   text-align: center;
+  margin-bottom: 1em;
 }
 
 .dish-card img {
@@ -96,7 +97,7 @@ button {
 .titleR {
   font-family: "Lucida Handwriting", cursive;
   font-size: 3rem;
-  margin: 0.7em 0.7em;
+  margin: 0.5em 0.5em;
 }
 
 .categoryBtns {
