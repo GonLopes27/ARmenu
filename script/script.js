@@ -55,8 +55,62 @@ function renderDishes(category = "all") {
 
 function filterDishes(category) {
     renderDishes(category);
+
+    // Gerir botão ativo
+    const buttons = document.querySelectorAll("#category-buttons button");
+    buttons.forEach(btn => btn.classList.remove("active"));
+
+    const activeBtn = [...buttons].find(btn => btn.dataset.category === category);
+    if (activeBtn) {
+        activeBtn.classList.add("active");
+
+        // Mover ponto para baixo do botão ativo
+        const indicator = document.querySelector(".active-indicator");
+        const btnRect = activeBtn.getBoundingClientRect();
+        const navRect = document.querySelector("#category-buttons").getBoundingClientRect();
+        const offset = btnRect.left - navRect.left + btnRect.width / 2 - 4; // centralizar bolinha
+
+        indicator.style.left = `${offset}px`;
+    }
 }
 
-// Load all on page load
-window.onload = () => renderDishes();
+document.addEventListener("DOMContentLoaded", () => {
+    const buttons = document.querySelectorAll("#category-buttons button");
+
+    buttons.forEach(btn => {
+        btn.addEventListener("click", () => {
+            const category = btn.dataset.category;
+
+            // Atualiza pratos
+            filterDishes(category);
+
+            // Remove estado ativo anterior
+            buttons.forEach(b => b.classList.remove("active"));
+
+            // Ativa novo botão
+            btn.classList.add("active");
+        });
+    });
+
+    // Inicializa estado
+    filterDishes("all");
+});
+
+let lastScrollY = window.scrollY;
+const header = document.getElementById("main-header");
+
+window.addEventListener("scroll", () => {
+  const currentScrollY = window.scrollY;
+
+  if (currentScrollY > lastScrollY && currentScrollY > 50) {
+    // A descer
+    header.classList.add("collapsed");
+  } else {
+    // A subir
+    header.classList.remove("collapsed");
+  }
+
+  lastScrollY = currentScrollY;
+});
+
 

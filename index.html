@@ -9,20 +9,24 @@
 </head>
 
 <body>
-    <header style="display: block;">
-        <h1 class="titleR">-- Menu --</h1>
-        <nav id="category-buttons" class="categoryBtns">
-            <button onclick="filterDishes('all')">Tudo</button>
-            <button onclick="filterDishes('carne')">Carne</button>
-            <button onclick="filterDishes('peixe')">Peixe</button>
-            <button onclick="filterDishes('sobremesa')">Sobremesas</button>
-        </nav>
+    <header class="main-header">
+      <div class="logo-area">
+        <h1 class="titleR">-- MENU --</h1>
+      </div>
     </header>
-
-
+  
+    <nav id="category-buttons" class="categoryBtns sticky-nav">
+      <button data-category="all" class="active">Entradas</button>
+      <button data-category="carne">Carne</button>
+      <button data-category="peixe">Peixe</button>
+      <button data-category="sobremesa">Sobremesas</button>
+      <div class="active-indicator"></div>
+    </nav>
+  
     <main id="dish-container"></main>
 
     <script src="script/script.js"></script>
-</body>
 
+  </body>
+  
 </html>
