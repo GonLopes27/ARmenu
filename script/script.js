@@ -1,101 +1,76 @@
-const dishes = [
-    {
-        id: "hamburguer", // used in URL
-        name: "Hambúrguer",
-        price: "8.00€",
-        image: "assets/images/hbg.png",
-        category: "carne",
-        modelGLB: "assets/models/Duck.glb",
-        modelUSDZ: "assets/models/Duck.usdz",
-        description: "Hambúrguer de carne grelhada com queijo, servido com batatas fritas."
-    },
-    {
-        id: "panados",
-        name: "Panados de Pescada",
-        price: "8.00€",
-        image: "assets/images/pnpe.png",
-        category: "peixe",
-        modelGLB: "assets/models/Fish.glb",
-        modelUSDZ: "assets/models/Fish.usdz",
-        description: "Panados dourados de pescada acompanhados de arroz e salada."
-    },
-    {
-        id: "doce",
-        name: "Doce da Casa",
-        price: "3.50€",
-        image: "assets/images/ddc.png",
-        category: "sobremesa",
-        modelGLB: "assets/models/Doce.glb",
-        modelUSDZ: "assets/models/Doce.usdz",
-        description: "Sobremesa tradicional feita com bolacha, natas e leite condensado."
+// Função para scroll suave com easing
+function smoothScrollTo(targetY, duration = 600) {
+  const startY = window.scrollY;
+  const distance = targetY - startY;
+  const startTime = performance.now();
+
+  function step(currentTime) {
+    const elapsed = currentTime - startTime;
+    const progress = Math.min(elapsed / duration, 1);
+
+    // Easing (easeInOutQuad)
+    const ease = progress < 0.5
+      ? 2 * progress * progress
+      : -1 + (4 - 2 * progress) * progress;
+
+    window.scrollTo(0, startY + distance * ease);
+
+    if (progress < 1) {
+      requestAnimationFrame(step);
     }
-];
+  }
 
-
-function renderDishes(category = "all") {
-    const container = document.getElementById("dish-container");
-    container.innerHTML = "";
-
-    const filtered = category === "all"
-        ? dishes
-        : dishes.filter(d => d.category === category);
-
-    filtered.forEach(dish => {
-        const card = document.createElement("div");
-        card.className = "dish-card";
-        card.innerHTML = `
-        <img src="${dish.image}" alt="${dish.name}">
-        <h3>${dish.name}</h3>
-        <p>${dish.price}</p>
-        <a href="details.html?dish=${dish.id}" class="view-3d-btn">Ver Modelo 3D</a>
-      `;
-        container.appendChild(card);
-    });
+  requestAnimationFrame(step);
 }
 
-function filterDishes(category) {
-    renderDishes(category);
-
-    // Gerir botão ativo
-    const buttons = document.querySelectorAll("#category-buttons button");
-    buttons.forEach(btn => btn.classList.remove("active"));
-
-    const activeBtn = [...buttons].find(btn => btn.dataset.category === category);
-    if (activeBtn) {
-        activeBtn.classList.add("active");
-
-        // Mover ponto para baixo do botão ativo
-        const indicator = document.querySelector(".active-indicator");
-        const btnRect = activeBtn.getBoundingClientRect();
-        const navRect = document.querySelector("#category-buttons").getBoundingClientRect();
-        const offset = btnRect.left - navRect.left + btnRect.width / 2 - 4; // centralizar bolinha
-
-        indicator.style.left = `${offset}px`;
-    }
-}
+// Scroll restoration manual + força topo no load
+window.history.scrollRestoration = 'manual';
+window.scrollTo(0, 0);
 
 document.addEventListener("DOMContentLoaded", () => {
-    const buttons = document.querySelectorAll("#category-buttons button");
+  const buttons = document.querySelectorAll("#category-buttons button");
 
-    buttons.forEach(btn => {
-        btn.addEventListener("click", () => {
-            const category = btn.dataset.category;
+  buttons.forEach(btn => {
+    btn.addEventListener("click", () => {
+      const category = btn.dataset.category;
 
-            // Atualiza pratos
-            filterDishes(category);
+      // Scroll até à secção ou topo
+      if (category === "entradas") {
+        smoothScrollTo(0);
+      } else {
+        const section = document.getElementById(`secao-${category}`);
+        if (section) {
+          const offset = section.getBoundingClientRect().top + window.scrollY;
+          const target = Math.min(offset - 80, document.body.scrollHeight - window.innerHeight);
+            smoothScrollTo(target);
+        }
+      }
 
-            // Remove estado ativo anterior
-            buttons.forEach(b => b.classList.remove("active"));
+      // Atualiza botão ativo
+      buttons.forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
 
-            // Ativa novo botão
-            btn.classList.add("active");
-        });
+      // Mover ponto laranja
+      const indicator = document.querySelector(".active-indicator");
+      const btnRect = btn.getBoundingClientRect();
+      const navRect = document.querySelector("#category-buttons").getBoundingClientRect();
+      const offset = btnRect.left - navRect.left + btnRect.width / 2 - 4;
+      indicator.style.left = `${offset}px`;
     });
+  });
 
-    // Inicializa estado
-    filterDishes("all");
+  // Posicionar ponto no botão ativo inicial
+  const activeBtn = document.querySelector('#category-buttons button.active');
+  if (activeBtn) {
+    const indicator = document.querySelector(".active-indicator");
+    const btnRect = activeBtn.getBoundingClientRect();
+    const navRect = document.querySelector("#category-buttons").getBoundingClientRect();
+    const offset = btnRect.left - navRect.left + btnRect.width / 2 - 4;
+    indicator.style.left = `${offset}px`;
+  }
 });
 
+// Animação de header ao scroll
 let lastScrollY = window.scrollY;
 const header = document.getElementById("main-header");
 
@@ -103,14 +78,10 @@ window.addEventListener("scroll", () => {
   const currentScrollY = window.scrollY;
 
   if (currentScrollY > lastScrollY && currentScrollY > 50) {
-    // A descer
     header.classList.add("collapsed");
   } else {
-    // A subir
     header.classList.remove("collapsed");
   }
 
   lastScrollY = currentScrollY;
 });
-
-
