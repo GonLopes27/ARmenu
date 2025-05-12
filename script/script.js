@@ -23,7 +23,6 @@ function smoothScrollTo(targetY, duration = 600) {
     if (progress < 1) {
       requestAnimationFrame(step);
     } else {
-      // Libera scrollspy depois da animação
       isScrollingProgrammatically = false;
     }
   }
@@ -40,6 +39,15 @@ document.addEventListener("DOMContentLoaded", () => {
   const indicator = document.querySelector(".active-indicator");
   const sections = document.querySelectorAll("h2[data-category]");
   const header = document.getElementById("main-header");
+
+  // Função para atualizar a posição do ponto laranja
+  function updateIndicatorPosition(activeBtn) {
+    if (!activeBtn || !indicator) return;
+    const btnRect = activeBtn.getBoundingClientRect();
+    const navRect = document.querySelector("#category-buttons").getBoundingClientRect();
+    const offset = btnRect.left - navRect.left + btnRect.width / 2 - 4;
+    indicator.style.left = `${offset}px`;
+  }
 
   // Clique nos filtros
   buttons.forEach(btn => {
@@ -58,26 +66,16 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       }
 
-      // Atualiza botão ativo
+      // Atualiza botão ativo e ponto
       buttons.forEach(b => b.classList.remove("active"));
       btn.classList.add("active");
-
-      // Mover ponto laranja
-      const btnRect = btn.getBoundingClientRect();
-      const navRect = document.querySelector("#category-buttons").getBoundingClientRect();
-      const offset = btnRect.left - navRect.left + btnRect.width / 2 - 4;
-      indicator.style.left = `${offset}px`;
+      updateIndicatorPosition(btn);
     });
   });
 
   // Posição inicial do ponto
   const activeBtn = document.querySelector('#category-buttons button.active');
-  if (activeBtn) {
-    const btnRect = activeBtn.getBoundingClientRect();
-    const navRect = document.querySelector("#category-buttons").getBoundingClientRect();
-    const offset = btnRect.left - navRect.left + btnRect.width / 2 - 4;
-    indicator.style.left = `${offset}px`;
-  }
+  updateIndicatorPosition(activeBtn);
 
   // ScrollSpy: atualiza botão e ponto conforme a secção visível
   window.addEventListener("scroll", () => {
@@ -85,9 +83,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let currentCategory = null;
 
-    sections.forEach(section => {
+    sections.forEach((section, index) => {
       const rect = section.getBoundingClientRect();
-      if (rect.top <= 100 && rect.bottom > 100) {
+      const isLast = index === sections.length - 1;
+
+      if (
+        (isLast && rect.top <= 200) ||
+        (!isLast && rect.top <= 150 && rect.bottom > 150)
+      ) {
         currentCategory = section.dataset.category;
       }
     });
@@ -98,10 +101,7 @@ document.addEventListener("DOMContentLoaded", () => {
         btn.classList.toggle("active", isActive);
 
         if (isActive) {
-          const btnRect = btn.getBoundingClientRect();
-          const navRect = document.querySelector("#category-buttons").getBoundingClientRect();
-          const offset = btnRect.left - navRect.left + btnRect.width / 2 - 4;
-          indicator.style.left = `${offset}px`;
+          updateIndicatorPosition(btn);
         }
       });
     }
@@ -114,6 +114,19 @@ document.addEventListener("DOMContentLoaded", () => {
       header.classList.remove("collapsed");
     }
     lastScrollY = currentScrollY;
+  });
+
+  // Corrige offset do ponto ao mudar de orientação ou redimensionar
+  window.addEventListener("resize", () => {
+    const activeBtn = document.querySelector('#category-buttons button.active');
+    updateIndicatorPosition(activeBtn);
+  });
+
+  window.addEventListener("orientationchange", () => {
+    setTimeout(() => {
+      const activeBtn = document.querySelector('#category-buttons button.active');
+      updateIndicatorPosition(activeBtn);
+    }, 300); // dá tempo para o layout se ajustar
   });
 });
 
