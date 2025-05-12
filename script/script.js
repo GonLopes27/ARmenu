@@ -1,5 +1,10 @@
+// Flag para bloquear scrollspy durante scroll programático
+let isScrollingProgrammatically = false;
+
 // Função para scroll suave com easing
 function smoothScrollTo(targetY, duration = 600) {
+  isScrollingProgrammatically = true;
+
   const startY = window.scrollY;
   const distance = targetY - startY;
   const startTime = performance.now();
@@ -17,32 +22,39 @@ function smoothScrollTo(targetY, duration = 600) {
 
     if (progress < 1) {
       requestAnimationFrame(step);
+    } else {
+      // Libera scrollspy depois da animação
+      isScrollingProgrammatically = false;
     }
   }
 
   requestAnimationFrame(step);
 }
 
-// Scroll restoration manual + força topo no load
+// Evita que o browser guarde scroll anterior
 window.history.scrollRestoration = 'manual';
 window.scrollTo(0, 0);
 
 document.addEventListener("DOMContentLoaded", () => {
   const buttons = document.querySelectorAll("#category-buttons button");
+  const indicator = document.querySelector(".active-indicator");
+  const sections = document.querySelectorAll("h2[data-category]");
+  const header = document.getElementById("main-header");
 
+  // Clique nos filtros
   buttons.forEach(btn => {
     btn.addEventListener("click", () => {
       const category = btn.dataset.category;
 
-      // Scroll até à secção ou topo
+      // Scroll para o topo ou para a secção
       if (category === "entradas") {
         smoothScrollTo(0);
       } else {
         const section = document.getElementById(`secao-${category}`);
         if (section) {
           const offset = section.getBoundingClientRect().top + window.scrollY;
-          const target = Math.min(offset - 80, document.body.scrollHeight - window.innerHeight);
-            smoothScrollTo(target);
+          const target = Math.min(offset - 90, document.body.scrollHeight - window.innerHeight);
+          smoothScrollTo(target);
         }
       }
 
@@ -51,7 +63,6 @@ document.addEventListener("DOMContentLoaded", () => {
       btn.classList.add("active");
 
       // Mover ponto laranja
-      const indicator = document.querySelector(".active-indicator");
       const btnRect = btn.getBoundingClientRect();
       const navRect = document.querySelector("#category-buttons").getBoundingClientRect();
       const offset = btnRect.left - navRect.left + btnRect.width / 2 - 4;
@@ -59,29 +70,51 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // Posicionar ponto no botão ativo inicial
+  // Posição inicial do ponto
   const activeBtn = document.querySelector('#category-buttons button.active');
   if (activeBtn) {
-    const indicator = document.querySelector(".active-indicator");
     const btnRect = activeBtn.getBoundingClientRect();
     const navRect = document.querySelector("#category-buttons").getBoundingClientRect();
     const offset = btnRect.left - navRect.left + btnRect.width / 2 - 4;
     indicator.style.left = `${offset}px`;
   }
+
+  // ScrollSpy: atualiza botão e ponto conforme a secção visível
+  window.addEventListener("scroll", () => {
+    if (isScrollingProgrammatically) return;
+
+    let currentCategory = null;
+
+    sections.forEach(section => {
+      const rect = section.getBoundingClientRect();
+      if (rect.top <= 100 && rect.bottom > 100) {
+        currentCategory = section.dataset.category;
+      }
+    });
+
+    if (currentCategory) {
+      buttons.forEach(btn => {
+        const isActive = btn.dataset.category === currentCategory;
+        btn.classList.toggle("active", isActive);
+
+        if (isActive) {
+          const btnRect = btn.getBoundingClientRect();
+          const navRect = document.querySelector("#category-buttons").getBoundingClientRect();
+          const offset = btnRect.left - navRect.left + btnRect.width / 2 - 4;
+          indicator.style.left = `${offset}px`;
+        }
+      });
+    }
+
+    // Header colapsável
+    const currentScrollY = window.scrollY;
+    if (currentScrollY > lastScrollY && currentScrollY > 50) {
+      header.classList.add("collapsed");
+    } else {
+      header.classList.remove("collapsed");
+    }
+    lastScrollY = currentScrollY;
+  });
 });
 
-// Animação de header ao scroll
 let lastScrollY = window.scrollY;
-const header = document.getElementById("main-header");
-
-window.addEventListener("scroll", () => {
-  const currentScrollY = window.scrollY;
-
-  if (currentScrollY > lastScrollY && currentScrollY > 50) {
-    header.classList.add("collapsed");
-  } else {
-    header.classList.remove("collapsed");
-  }
-
-  lastScrollY = currentScrollY;
-});

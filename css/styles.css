@@ -25,6 +25,10 @@ html, body {
   overflow-x: clip;
 }
 
+main {
+  padding-bottom: 150px;
+}
+
 body {
   font-family: 'Inter', sans-serif;
   background-color: #F3F3F3;
@@ -85,21 +89,22 @@ nav li.active {
 }
 
 .dish-card {
-  background: #fff;
-  border-radius: 16px;
-  padding: 1rem;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  all: unset;
+  cursor: pointer;
   display: flex;
   gap: 1rem;
+  background: #fff;
+  border-radius: 10px;
+  padding: 1.5rem 1rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
   margin: 0 1rem 1.5rem;
   align-items: center;
 }
 
 .dish-card img {
-  width: 80px;
-  height: 80px;
+  width: 90px;
+  height: 90px;
   object-fit: cover;
-  border-radius: 12px;
 }
 
 .dish-card h3 {
@@ -146,7 +151,7 @@ button {
   position: sticky;
   top: 0;
   z-index: 100;
-  box-shadow: 0 10px 9px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 9px rgba(0, 0, 0, 0.05);
 }
 
 .categoryBtns button {
@@ -247,6 +252,6 @@ header {
 h2[id^="secao-"] {
   scroll-margin-top: 100px;
   font-size: 1.2rem;
-  margin: 2rem 1rem 1rem;
+  margin: 1.6rem 1rem 1rem;
   font-weight: 600;
 }

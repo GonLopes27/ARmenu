@@ -1,15 +1,12 @@
 <!DOCTYPE html>
 <html lang="pt">
-
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Menu</title>
-
-  <link rel="stylesheet" href="css/styles.css">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
 </head>
-
 <body>
   <header class="main-header">
     <div class="logo-area">
@@ -25,101 +22,124 @@
     <div class="active-indicator"></div>
   </nav>
 
+  <main id="dish-container">
+    <!-- ENTRADAS -->
+    <h2 id="secao-entradas" data-category="entradas">Pratos de Entrada:</h2>
 
-  <main id="dish-container"></main>
+    <button class="dish-card">
+      <img src="assets/images/placeholderDuck.png" alt="Pão com Manteiga" />
+      <div class="info">
+        <h3>Pão com Manteiga <span class="price">3.00€</span></h3>
+        <p>Pão fresco torrado servido com manteiga derretida.</p>
+      </div>
+    </button>
 
+    <button class="dish-card">
+      <img src="assets/images/placeholderDuck.png" alt="Sopa de Legumes" />
+      <div class="info">
+        <h3>Sopa de Legumes <span class="price">3.50€</span></h3>
+        <p>Creme de legumes variados com temperos caseiros.</p>
+      </div>
+    </button>
 
-  <!-- ENTRADAS -->
-  <h2 id="secao-entradas">Pratos de Entrada:</h2>
+    <!-- CARNE -->
+    <h2 id="secao-carne" data-category="carne">Pratos de Carne:</h2>
 
-  <div class="dish-card">
-    <img src="assets/images/placeholderDuck.png" alt="Pão com Manteiga">
-    <div class="info">
-      <h3>Pão com Manteiga <span class="price">3.00€</span></h3>
-      <p>Pão fresco torrado servido com manteiga derretida.</p>
-    </div>
-  </div>
+    <button class="dish-card">
+      <img src="assets/images/placeholderDuck.png" alt="Hambúrguer" />
+      <div class="info">
+        <h3>Hambúrguer <span class="price">9.00€</span></h3>
+        <p>Sanduíche de carne grelhada com pão, vegetais e molhos.</p>
+      </div>
+    </button>
 
-  <div class="dish-card">
-    <img src="assets/images/placeholderDuck.png" alt="Sopa de Legumes">
-    <div class="info">
-      <h3>Sopa de Legumes <span class="price">3.50€</span></h3>
-      <p>Creme de legumes variados com temperos caseiros.</p>
-    </div>
-  </div>
+    <button class="dish-card">
+      <img src="assets/images/placeholderDuck.png" alt="Carne de Porco à Alentejana" />
+      <div class="info">
+        <h3>Carne de Porco à Alentejana <span class="price">11.00€</span></h3>
+        <p>Carne de porco com amêijoas, batatas fritas e coentros.</p>
+      </div>
+    </button>
 
+    <button class="dish-card">
+      <img src="assets/images/placeholderDuck.png" alt="Francesinha" />
+      <div class="info">
+        <h3>Francesinha <span class="price">9.50€</span></h3>
+        <p>Sanduíche recheada com carnes, queijo e molho picante.</p>
+      </div>
+    </button>
 
-  <!-- CARNE -->
-  <h2 id="secao-carne">Pratos de Carne:</h2>
+    <!-- PEIXE -->
+    <h2 id="secao-peixe" data-category="peixe">Pratos de Peixe:</h2>
 
-  <div class="dish-card">
-    <img src="assets/images/placeholderDuck.png" alt="Hambúrguer">
-    <div class="info">
-      <h3>Hambúrguer <span class="price">9.00€</span></h3>
-      <p>Sanduíche de carne grelhada com pão, vegetais e molhos.</p>
-    </div>
-  </div>
+    <button class="dish-card">
+      <img src="assets/images/placeholderDuck.png" alt="Panados de Pescada" />
+      <div class="info">
+        <h3>Panados de Pescada <span class="price">8.00€</span></h3>
+        <p>Panados dourados de pescada com arroz de tomate.</p>
+      </div>
+    </button>
 
-  <div class="dish-card">
-    <img src="assets/images/placeholderDuck.png" alt="Carne de Porco à Alentejana">
-    <div class="info">
-      <h3>Carne de Porco à Alentejana <span class="price">11.00€</span></h3>
-      <p>Carne de porco com amêijoas, batatas fritas e coentros.</p>
-    </div>
-  </div>
+    <button class="dish-card">
+      <img src="assets/images/placeholderDuck.png" alt="Bacalhau com Natas" />
+      <div class="info">
+        <h3>Bacalhau com Natas <span class="price">8.50€</span></h3>
+        <p>Bacalhau desfiado com batata, natas e queijo gratinado.</p>
+      </div>
+    </button>
 
-  <div class="dish-card">
-    <img src="assets/images/placeholderDuck.png" alt="Francesinha">
-    <div class="info">
-      <h3>Francesinha <span class="price">9.50€</span></h3>
-      <p>Sanduíche recheada com carnes, queijo e molho picante.</p>
-    </div>
-  </div>
+    <button class="dish-card">
+      <img src="assets/images/placeholderDuck.png" alt="Dourada Grelhada" />
+      <div class="info">
+        <h3>Dourada Grelhada <span class="price">10.00€</span></h3>
+        <p>Dourada fresca grelhada com batatas e legumes salteados.</p>
+      </div>
+    </button>
 
+    <button class="dish-card">
+      <img src="assets/images/placeholderDuck.png" alt="Salmão com Molho de Limão" />
+      <div class="info">
+        <h3>Salmão com Molho de Limão <span class="price">11.50€</span></h3>
+        <p>Filete de salmão grelhado servido com molho leve de limão.</p>
+      </div>
+    </button>
 
-  <!-- PEIXE -->
-  <h2 id="secao-peixe">Pratos de Peixe:</h2>
+    <!-- SOBREMESA -->
+    <h2 id="secao-sobremesa" data-category="sobremesa">Sobremesas:</h2>
 
-  <div class="dish-card">
-    <img src="assets/images/placeholderDuck.png" alt="Panados de Pescada">
-    <div class="info">
-      <h3>Panados de Pescada <span class="price">8.00€</span></h3>
-      <p>Panados dourados de pescada com arroz de tomate.</p>
-    </div>
-  </div>
+    <button class="dish-card">
+      <img src="assets/images/placeholderDuck.png" alt="Doce da Casa" />
+      <div class="info">
+        <h3>Doce da Casa <span class="price">3.50€</span></h3>
+        <p>Camadas de bolacha, natas e leite condensado.</p>
+      </div>
+    </button>
 
-  <div class="dish-card">
-    <img src="assets/images/placeholderDuck.png" alt="Bacalhau com Natas">
-    <div class="info">
-      <h3>Bacalhau com Natas <span class="price">8.50€</span></h3>
-      <p>Bacalhau desfiado com batata, natas e queijo gratinado.</p>
-    </div>
-  </div>
+    <button class="dish-card">
+      <img src="assets/images/placeholderDuck.png" alt="Mousse de Chocolate" />
+      <div class="info">
+        <h3>Mousse de Chocolate <span class="price">3.00€</span></h3>
+        <p>Clássica mousse de chocolate negro caseira.</p>
+      </div>
+    </button>
 
+    <button class="dish-card">
+      <img src="assets/images/placeholderDuck.png" alt="Cheesecake de Frutos Vermelhos" />
+      <div class="info">
+        <h3>Cheesecake de Frutos Vermelhos <span class="price">3.80€</span></h3>
+        <p>Cremoso cheesecake com cobertura de frutos silvestres.</p>
+      </div>
+    </button>
 
-  <!-- SOBREMESA -->
-  <h2 id="secao-sobremesa">Sobremesas:</h2>
-
-  <div class="dish-card">
-    <img src="assets/images/placeholderDuck.png" alt="Doce da Casa">
-    <div class="info">
-      <h3>Doce da Casa <span class="price">3.50€</span></h3>
-      <p>Camadas de bolacha, natas e leite condensado.</p>
-    </div>
-  </div>
-
-  <div class="dish-card">
-    <img src="assets/images/placeholderDuck.png" alt="Mousse de Chocolate">
-    <div class="info">
-      <h3>Mousse de Chocolate <span class="price">3.00€</span></h3>
-      <p>Clássica mousse de chocolate negro caseira.</p>
-    </div>
-  </div>
-
-
+    <button class="dish-card">
+      <img src="assets/images/placeholderDuck.png" alt="Tarte de Maçã" />
+      <div class="info">
+        <h3>Tarte de Maçã <span class="price">3.20€</span></h3>
+        <p>Tarte caseira de maçã servida morna com canela.</p>
+      </div>
+    </button>
+  </main>
 
   <script src="script/script.js"></script>
-
 </body>
-
 </html>
