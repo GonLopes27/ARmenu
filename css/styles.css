@@ -28,7 +28,7 @@ html, body {
 }
 
 main {
-  padding: 0 1rem;
+  padding: 0 2rem;
 }
 
 body {
@@ -101,7 +101,7 @@ nav li.active {
   background: #fff;
   border-radius: 10px;
   padding: 1.5rem 1rem;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
   margin: 0 auto 1.5rem;
   align-items: center;
   width: 100%;
@@ -116,7 +116,8 @@ nav li.active {
 }
 
 .dish-card h3 {
-  font-size: 1rem;
+  font-size: 14px;
+  font-weight: 600;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -129,13 +130,14 @@ nav li.active {
 
 .dish-card .price {
   color: #FF5900;
-  font-weight: bold;
-  font-size: 0.95rem;
+  font-weight: 500;
+  font-size: 12px;
 }
 
 .dish-card p {
-  color: #555;
-  font-size: 0.875rem;
+  color: #7D7D7D;
+  font-size: 12px;
+  font-weight: 400;
   margin: 0;
 }
 
@@ -151,7 +153,7 @@ button {
 }
 
 .categoryBtns {
-    width: 100%;
+  width: 100%;
   max-width: 100%;
   box-sizing: border-box;
   display: flex;
@@ -162,7 +164,7 @@ button {
   position: sticky;
   top: 0;
   z-index: 100;
-  box-shadow: 0 10px 9px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.05);
 }
 
 .categoryBtns button {
@@ -171,8 +173,8 @@ button {
   background: none;
   border: none;
   color: black;
-  font-size: 0.95rem;
-  font-weight: bold;
+  font-size: 14px;
+  font-weight: 400;
   padding: 0.5rem 0;
   cursor: pointer;
 }
@@ -262,7 +264,20 @@ header {
 
 h2[id^="secao-"] {
   scroll-margin-top: 100px;
-  font-size: 1.2rem;
-  margin: 3rem 1rem 1rem;
-  font-weight: 600;
+  font-size: 14px;
+  color: #7D7D7D;
+  margin: 1.7rem 1rem 1rem;
+  font-weight: 400;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  position: relative;
+}
+
+h2[id^="secao-"]::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background-color: #9D9D9D;
+  margin-left: 0.5rem;
 }
