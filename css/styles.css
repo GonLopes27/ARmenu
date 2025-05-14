@@ -59,12 +59,12 @@ main {
 
 .info-icon{
   position: absolute;
-  right: 1rem;
-  top: 55%;
+  right: 1.6rem;
+  top: 58%;
   transform: translateY(-50%);
-  opacity: 70%;
-  width: 30px;
-  height: 30px;
+  opacity: 60%;
+  width: 32px;
+  height: 32px;
   cursor:pointer;
 }
 
@@ -105,7 +105,7 @@ h2[id^="secao-"]::after {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.5rem 1rem 1.7rem;
+  padding: 0rem 1rem 1.7rem;
   background-color: #fff;
   position: sticky;
   top: 0;
@@ -116,7 +116,7 @@ h2[id^="secao-"]::after {
 .categoryBtns button {
   flex: 1;
   text-align: center;
-  transform: translateY(4px);
+  transform: translateY(10px);
   background: none;
   border: none;
   color: black;
@@ -132,7 +132,7 @@ h2[id^="secao-"]::after {
 
 .active-indicator {
   position: absolute;
-  transform: translateY(-9px);
+  transform: translateY(-5px);
   bottom: 6px;
   width: 7px;
   height: 7px;
