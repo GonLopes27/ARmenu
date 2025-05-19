@@ -17,6 +17,7 @@ html, body {
   background-color: #F3F3F3;
 }
 
+
 /* LAYOUT */
 main {
   padding: 0 2rem;
@@ -68,13 +69,6 @@ main {
   cursor:pointer;
 }
 
-.titleR {
-  font-family: "Lucida Handwriting", cursive;
-  font-size: 2rem;
-  line-height: 1.2;
-  margin: 0;
-  display: inline-block;
-}
 
 /* SECÇÕES */
 h2[id^="secao-"] {
@@ -96,6 +90,8 @@ h2[id^="secao-"]::after {
   background-color: #909090;
   margin-left: 0.5rem;
 }
+
+
 
 /* NAVEGAÇÃO */
 .categoryBtns {
@@ -142,6 +138,8 @@ h2[id^="secao-"]::after {
   left: 0;
 }
 
+
+
 /* CARDS */
 .dish-card {
   all: unset;
@@ -154,18 +152,17 @@ h2[id^="secao-"]::after {
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
   margin: 0 auto 1.5rem;
   align-items: center;
-  justify-content: flex-start;
   width: 100%;
   max-width: 500px;
   box-sizing: border-box;
 }
 
-.padding-xl {
-  padding: 1.5rem 3rem 1.5rem 1rem;
-}
-
-.padding-sm {
-  padding: 1.5rem 1.5rem 1.5rem 1rem;
+.info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
 }
 
 .dish-card img {
@@ -173,13 +170,6 @@ h2[id^="secao-"]::after {
   height: 90px;
   object-fit: cover;
   border-radius: 6px;
-}
-
-.dish-card .info {
-  flex: 1;
-  min-width: 0;
-  display: flex;
-  flex-direction: column;
 }
 
 .dish-title {
@@ -191,24 +181,42 @@ h2[id^="secao-"]::after {
   word-break: break-word;
 }
 
-.dish-title .dot-char {
-  color: #FF5900;
-  margin: 0 0.4rem;
-  font-size: 12px;
+.rating-price {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
 }
 
-.dish-title .price {
-  font-size: 12px;
-  font-weight: 500;
-  color: #FF5900;
+.rating-price .star{
+  width: 12px;
+  height: 12px;
 }
 
-.dish-card p {
+.rating-price .rating{
+  font-size: 12px;
+  font-weight: 400;
+  color: #313131;
+}
+
+.rating-price .dot-char{
+  font-size: 12px;
+  font-weight: 400;
+  color: #313131;
+}
+
+.rating-price .price{
+  font-size: 12px;
+  font-weight: 400;
+  color: #313131;
+}
+
+.description {
   margin-top: 0.4rem;
   font-size: 12px;
   font-weight: 400;
   color: #909090;
 }
+
 
 
 /* POP-UP DETALHES DO PRATO */
@@ -258,7 +266,7 @@ h2[id^="secao-"]::after {
   border-radius: 2.5px;
   margin: 0 auto 1rem auto;
   cursor: grab;
-  touch-action: none; /* previne gestos nativos no dragBar */
+  touch-action: none;
 }
 
 .popup-toggle {
@@ -334,9 +342,6 @@ h2[id^="secao-"]::after {
   max-height: 5.5rem;
   overflow: hidden;
   text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
 }
 
 .popup-buttons {

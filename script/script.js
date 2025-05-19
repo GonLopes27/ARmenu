@@ -3,6 +3,7 @@ const dishes = [
   {
     id: "paocommanteiga",
     name: "Pão com Manteiga",
+    rating: "3,5",
     price: "3,00€",
     image: "assets/images/placeholderDuck.png",
     description: "Pão fresco torrado servido com manteiga derretida."
@@ -10,6 +11,7 @@ const dishes = [
   {
     id: "sopadelegumes",
     name: "Sopa de Legumes",
+    rating: "3,9",
     price: "3,50€",
     image: "assets/images/placeholderDuck.png",
     description: "Creme de legumes variados com temperos caseiros."
@@ -17,6 +19,7 @@ const dishes = [
   {
     id: "hamburguer",
     name: "Hambúrguer",
+    rating: "4,0",
     price: "9,00€",
     image: "assets/images/placeholderDuck.png",
     description: "Sanduíche de carne grelhada com pão, vegetais e molhos."
@@ -24,6 +27,7 @@ const dishes = [
   {
     id: "carnedeporcoaalentejana",
     name: "Carne de Porco à Alentejana",
+    rating: "4,6",
     price: "11,00€",
     image: "assets/images/placeholderDuck.png",
     description: "Carne de porco com amêijoas, batatas fritas e coentros."
@@ -31,6 +35,7 @@ const dishes = [
   {
     id: "francesinha",
     name: "Francesinha",
+    rating: "4,2",
     price: "9,50€",
     image: "assets/images/placeholderDuck.png",
     description: "Sanduíche recheada com carnes, queijo e molho picante."
@@ -38,6 +43,7 @@ const dishes = [
   {
     id: "bacalhaucomnatas",
     name: "Bacalhau com Natas",
+    rating: "3,3",
     price: "8,50€",
     image: "assets/images/placeholderDuck.png",
     description: "Bacalhau desfiado com batata, natas e queijo gratinado."
@@ -45,6 +51,7 @@ const dishes = [
   {
     id: "douradagrelhada",
     name: "Dourada Grelhada",
+    rating: "3,8",
     price: "10,00€",
     image: "assets/images/placeholderDuck.png",
     description: "Dourada fresca grelhada com batatas e legumes salteados."
@@ -52,6 +59,7 @@ const dishes = [
   {
     id: "salmaocommolhodelimao",
     name: "Salmão com Molho de Limão",
+    rating: "3,9",
     price: "11,50€",
     image: "assets/images/placeholderDuck.png",
     description: "Filete de salmão grelhado servido com molho leve de limão."
@@ -59,6 +67,7 @@ const dishes = [
   {
     id: "docedacasa",
     name: "Doce da Casa",
+    rating: "4,0",
     price: "3,50€",
     image: "assets/images/placeholderDuck.png",
     description: "Camadas de bolacha, natas e leite condensado."
@@ -66,6 +75,7 @@ const dishes = [
   {
     id: "moussedechocolate",
     name: "Mousse de Chocolate",
+    rating: "3,9",
     price: "3,00€",
     image: "assets/images/placeholderDuck.png",
     description: "Clássica mousse de chocolate negro caseira."
@@ -73,6 +83,7 @@ const dishes = [
   {
     id: "tartedemaca",
     name: "Tarte de Maçã",
+    rating: "4,1",
     price: "3,20€",
     image: "assets/images/placeholderDuck.png",
     description: "Tarte caseira de maçã servida morna com canela."
@@ -82,7 +93,6 @@ const dishes = [
 
 let isScrollingProgrammatically = false;
 
-// Função para scroll suave com easing
 function smoothScrollTo(targetY, duration = 600) {
   isScrollingProgrammatically = true;
 
@@ -97,7 +107,7 @@ function smoothScrollTo(targetY, duration = 600) {
       ? 2 * progress * progress
       : -1 + (4 - 2 * progress) * progress;
 
-    window.scrollTo(0, startY + distance * ease);
+    window.scrollTo(0, startY + distance * ease)
 
     if (progress < 1) {
       requestAnimationFrame(step);
@@ -220,6 +230,7 @@ function showDishPopup(dish) {
 
   document.getElementById("popup-img").src = dish.image;
   document.getElementById("popup-title").textContent = dish.name;
+  document.getElementById("popup-rating").textContent = dish.rating;
   document.getElementById("popup-price").textContent = dish.price;
   document.getElementById("popup-description").textContent = dish.description;
 
@@ -240,7 +251,7 @@ function closeDishPopup() {
   enablePageScroll();
 }
 
-// Ao clicar fora
+
 document.getElementById("dish-popup-overlay").addEventListener("click", closeDishPopup);
 
 document.querySelectorAll(".dish-card").forEach((card, index) => {
@@ -288,14 +299,14 @@ overlay.addEventListener('click', closePopup);
 dragBar.addEventListener('touchstart', e => {
   startY = e.touches[0].clientY;
   isDragging = true;
-  popup.style.transition = 'none'; // desliga transição enquanto arrasta
+  popup.style.transition = 'none';
 });
 
 dragBar.addEventListener('touchmove', e => {
   if (!isDragging) return;
   currentY = e.touches[0].clientY;
   let deltaY = currentY - startY;
-  if (deltaY > 0) { // só permite arrastar para baixo
+  if (deltaY > 0) {
     popup.style.transform = `translateX(-50%) translateY(${deltaY}px)`;
   }
 });
@@ -303,13 +314,13 @@ dragBar.addEventListener('touchmove', e => {
 dragBar.addEventListener('touchend', e => {
   if (!isDragging) return;
   isDragging = false;
-  popup.style.transition = 'transform 0.3s ease'; // liga transição outra vez
+  popup.style.transition = 'transform 0.3s ease';
 
   let deltaY = currentY - startY;
-  if (deltaY > 100) { // se arrastou mais que 100px, fecha popup
+  if (deltaY > 100) {
     closePopup();
   } else {
-    popup.style.transform = 'translateX(-50%) translateY(0)'; // volta ao lugar
+    popup.style.transform = 'translateX(-50%) translateY(0)';
   }
 });
 
