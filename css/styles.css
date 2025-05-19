@@ -109,7 +109,7 @@ h2[id^="secao-"]::after {
   background-color: #fff;
   position: sticky;
   top: 0;
-  z-index: 100;
+  z-index: 50;
   box-shadow: 0 5px 5px rgba(0, 0, 0, 0.05);
 }
 
@@ -208,4 +208,149 @@ h2[id^="secao-"]::after {
   font-size: 12px;
   font-weight: 400;
   color: #909090;
+}
+
+
+/* POP-UP DETALHES DO PRATO */
+
+.popup-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0,0,0,0.3);
+  z-index: 99;
+}
+
+.dish-popup {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90vw;
+  height: 80vh;
+  max-height: 90vh;
+  background: #fff;
+  border-radius: 16px 16px 0 0;
+  padding: 1rem;
+  box-shadow: 0 -4px 10px rgba(0,0,0,0.1);
+  z-index: 99;
+  padding: 1.5rem 2rem;
+}
+
+.hidden {
+  display: none;
+}
+
+.popup-drag-bar {
+  width: 40px;
+  height: 5px;
+  background-color: #D9D9D9;
+  border-radius: 2.5px;
+  margin: 0 auto 1rem auto;
+}
+
+.popup-toggle {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  font-size: 14px;
+  font-weight: 500;
+  padding-bottom: 1rem;
+}
+
+.popup-toggle span {
+  opacity: 0.4;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.popup-toggle .active {
+  opacity: 1;
+  border-bottom: 2px solid #313131;
+}
+
+.popup-image {
+  margin-bottom: 1rem;
+}
+
+.popup-image img {
+  width: 100%;
+  max-height: 220px;
+  object-fit: contain;
+  border-radius: 12px;
+}
+
+.popup-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.popup-content h3 {
+  font-size: 24px;
+  font-weight: 500;
+  margin: 0;
+}
+
+.popup-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 20px;
+  font-weight: 400;
+  margin: 0;
+}
+
+.popup-star {
+  width: 17px;
+  height: 17px;
+}
+
+.dot-char {
+  color: #313131;
+  font-size: 15px;
+  margin: 0 4px;
+}
+
+.popup-content p {
+  font-size: 13px;
+  color: #5D5D5D;
+  line-height: 1.4;
+  margin: 0;
+}
+
+.evaluate-btn {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  background: none;
+  border: none;
+  width: 80%;
+  border-radius: 10px;
+  font-size: 14px;
+  color: #313131;
+  text-align: center;
+  padding: 1rem 0;
+  cursor: pointer;
+}
+
+.ar-btn {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;
+  background: #FF5900;
+  color: white;
+  padding: 0.85rem;
+  font-size: 14px;
+  font-weight: 500;
+  text-align: center;
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  cursor: pointer;
+}
+
+@keyframes slideUp {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
 }

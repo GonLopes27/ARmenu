@@ -1,3 +1,85 @@
+
+const dishes = [
+  {
+    id: "paocommanteiga",
+    name: "Pão com Manteiga",
+    price: "3,00€",
+    image: "assets/images/placeholderDuck.png",
+    description: "Pão fresco torrado servido com manteiga derretida."
+  },
+  {
+    id: "sopadelegumes",
+    name: "Sopa de Legumes",
+    price: "3,50€",
+    image: "assets/images/placeholderDuck.png",
+    description: "Creme de legumes variados com temperos caseiros."
+  },
+  {
+    id: "hamburguer",
+    name: "Hambúrguer",
+    price: "9,00€",
+    image: "assets/images/placeholderDuck.png",
+    description: "Sanduíche de carne grelhada com pão, vegetais e molhos."
+  },
+  {
+    id: "carnedeporcoaalentejana",
+    name: "Carne de Porco à Alentejana",
+    price: "11,00€",
+    image: "assets/images/placeholderDuck.png",
+    description: "Carne de porco com amêijoas, batatas fritas e coentros."
+  },
+  {
+    id: "francesinha",
+    name: "Francesinha",
+    price: "9,50€",
+    image: "assets/images/placeholderDuck.png",
+    description: "Sanduíche recheada com carnes, queijo e molho picante."
+  },
+  {
+    id: "bacalhaucomnatas",
+    name: "Bacalhau com Natas",
+    price: "8,50€",
+    image: "assets/images/placeholderDuck.png",
+    description: "Bacalhau desfiado com batata, natas e queijo gratinado."
+  },
+  {
+    id: "douradagrelhada",
+    name: "Dourada Grelhada",
+    price: "10,00€",
+    image: "assets/images/placeholderDuck.png",
+    description: "Dourada fresca grelhada com batatas e legumes salteados."
+  },
+  {
+    id: "salmaocommolhodelimao",
+    name: "Salmão com Molho de Limão",
+    price: "11,50€",
+    image: "assets/images/placeholderDuck.png",
+    description: "Filete de salmão grelhado servido com molho leve de limão."
+  },
+  {
+    id: "docedacasa",
+    name: "Doce da Casa",
+    price: "3,50€",
+    image: "assets/images/placeholderDuck.png",
+    description: "Camadas de bolacha, natas e leite condensado."
+  },
+  {
+    id: "moussedechocolate",
+    name: "Mousse de Chocolate",
+    price: "3,00€",
+    image: "assets/images/placeholderDuck.png",
+    description: "Clássica mousse de chocolate negro caseira."
+  },
+  {
+    id: "tartedemaca",
+    name: "Tarte de Maçã",
+    price: "3,20€",
+    image: "assets/images/placeholderDuck.png",
+    description: "Tarte caseira de maçã servida morna com canela."
+  }
+];
+
+
 let isScrollingProgrammatically = false;
 
 // Função para scroll suave com easing
@@ -117,3 +199,37 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 let lastScrollY = window.scrollY;
+
+
+// Novo: abrir popup com dados do prato
+function showDishPopup(dish) {
+  const overlay = document.getElementById("dish-popup-overlay");
+  const popup = document.getElementById("dish-popup");
+
+  document.getElementById("popup-img").src = dish.image;
+  document.getElementById("popup-title").textContent = dish.name;
+  document.getElementById("popup-price").textContent = dish.price;
+  document.getElementById("popup-description").textContent = dish.description;
+
+  overlay.classList.remove("hidden");
+  popup.classList.remove("hidden");
+}
+
+// Fechar popup
+function closeDishPopup() {
+  document.getElementById("dish-popup-overlay").classList.add("hidden");
+  document.getElementById("dish-popup").classList.add("hidden");
+}
+
+// Ao clicar fora
+document.getElementById("dish-popup-overlay").addEventListener("click", closeDishPopup);
+
+document.querySelectorAll(".dish-card").forEach((card, index) => {
+  card.addEventListener("click", () => {
+    const dish = dishes[index];
+    if (dish) {
+      showDishPopup(dish);
+    }
+  });
+});
+
