@@ -51,9 +51,9 @@ main {
 }
 
 .logo-text {
-  font-size: 17px;
-  font-weight: 200;
-  color: #191919;
+  font-size: 18px;
+  font-weight: 400;
+  color: #313131;
   font-family: 'Inter', sans-serif;
 }
 
@@ -80,9 +80,9 @@ main {
 h2[id^="secao-"] {
   scroll-margin-top: 100px;
   font-size: 14px;
-  color: #7D7D7D;
+  color: #909090;
   margin: 1.7rem 1rem 1rem;
-  font-weight: 400;
+  font-weight: 500;
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -93,7 +93,7 @@ h2[id^="secao-"]::after {
   content: "";
   flex: 1;
   height: 1px;
-  background-color: #9D9D9D;
+  background-color: #909090;
   margin-left: 0.5rem;
 }
 
@@ -119,15 +119,15 @@ h2[id^="secao-"]::after {
   transform: translateY(10px);
   background: none;
   border: none;
-  color: black;
-  font-size: 13px;
-  font-weight: 400;
+  color: #909090;
+  font-size: 14px;
+  font-weight: 500;
   padding: 0.5rem 0;
   cursor: pointer;
 }
 
 .categoryBtns button.active {
-  color: #FF5900;
+  color: #313131;
 }
 
 .active-indicator {
@@ -183,9 +183,9 @@ h2[id^="secao-"]::after {
 }
 
 .dish-title {
-  font-size: 13px;
-  font-weight: 600;
-  color: black;
+  font-size: 14px;
+  font-weight: 500;
+  color: #313131;
   display: inline;
   white-space: normal;
   word-break: break-word;
@@ -205,7 +205,7 @@ h2[id^="secao-"]::after {
 
 .dish-card p {
   margin-top: 0.4rem;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 400;
-  color: #8D8D8D;
+  color: #909090;
 }
