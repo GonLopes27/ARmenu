@@ -226,6 +226,10 @@ function showDishPopup(dish) {
   overlay.classList.remove("hidden");
   popup.classList.remove("hidden");
 
+    popup.classList.remove('hidden');
+  overlay.classList.remove('hidden');
+
+  openPopup();
   disablePageScroll();
 }
 
@@ -246,5 +250,66 @@ document.querySelectorAll(".dish-card").forEach((card, index) => {
       showDishPopup(dish);
     }
   });
+});
+
+const popup = document.getElementById('dish-popup');
+const overlay = document.getElementById('dish-popup-overlay');
+const dragBar = document.querySelector('.popup-drag-bar');
+
+let startY = 0;
+let currentY = 0;
+let isDragging = false;
+
+function openPopup() {
+  popup.classList.remove('closing', 'hidden');
+  overlay.classList.remove('hidden');
+  void popup.offsetWidth; 
+  popup.classList.add('open');
+  disablePageScroll();
+}
+
+function closePopup() {
+  popup.classList.remove('open');
+  popup.classList.add('closing');
+  enablePageScroll();
+  overlay.classList.add('hidden');
+
+  popup.addEventListener('transitionend', () => {
+    if (popup.classList.contains('closing')) {
+      popup.classList.add('hidden');
+      popup.classList.remove('closing');
+      popup.style.transform = 'translateX(-50%) translateY(100%)';
+    }
+  }, { once: true });
+}
+
+overlay.addEventListener('click', closePopup);
+
+dragBar.addEventListener('touchstart', e => {
+  startY = e.touches[0].clientY;
+  isDragging = true;
+  popup.style.transition = 'none'; // desliga transição enquanto arrasta
+});
+
+dragBar.addEventListener('touchmove', e => {
+  if (!isDragging) return;
+  currentY = e.touches[0].clientY;
+  let deltaY = currentY - startY;
+  if (deltaY > 0) { // só permite arrastar para baixo
+    popup.style.transform = `translateX(-50%) translateY(${deltaY}px)`;
+  }
+});
+
+dragBar.addEventListener('touchend', e => {
+  if (!isDragging) return;
+  isDragging = false;
+  popup.style.transition = 'transform 0.3s ease'; // liga transição outra vez
+
+  let deltaY = currentY - startY;
+  if (deltaY > 100) { // se arrastou mais que 100px, fecha popup
+    closePopup();
+  } else {
+    popup.style.transform = 'translateX(-50%) translateY(0)'; // volta ao lugar
+  }
 });
 

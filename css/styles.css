@@ -224,16 +224,27 @@ h2[id^="secao-"]::after {
   position: fixed;
   bottom: 0;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translateX(-50%) translateY(100%);
   width: 90vw;
   height: 80vh;
   max-height: 90vh;
   background: #fff;
   border-radius: 16px 16px 0 0;
-  padding: 1rem;
+  padding: 1.5rem 2rem;
   box-shadow: 0 -4px 10px rgba(0,0,0,0.1);
   z-index: 99;
-  padding: 1.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease;
+}
+
+
+.dish-popup.open {
+  transform: translateX(-50%) translateY(0);
+}
+
+.dish-popup.closing {
+  transform: translateX(-50%) translateY(100%);
 }
 
 .hidden {
@@ -246,6 +257,8 @@ h2[id^="secao-"]::after {
   background-color: #D9D9D9;
   border-radius: 2.5px;
   margin: 0 auto 1rem auto;
+  cursor: grab;
+  touch-action: none; /* previne gestos nativos no dragBar */
 }
 
 .popup-toggle {
@@ -279,16 +292,9 @@ h2[id^="secao-"]::after {
   border-radius: 12px;
 }
 
-.popup-content {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
 .popup-content h3 {
   font-size: 24px;
   font-weight: 500;
-  margin: 0;
 }
 
 .popup-meta {
@@ -297,7 +303,7 @@ h2[id^="secao-"]::after {
   gap: 0.35rem;
   font-size: 20px;
   font-weight: 400;
-  margin: 0;
+  margin-bottom: 0.2rem;
 }
 
 .popup-star {
@@ -311,11 +317,33 @@ h2[id^="secao-"]::after {
   margin: 0 4px;
 }
 
+.popup-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
 .popup-content p {
-  font-size: 13px;
+  font-size: 14px;
+  font-weight: 400;
   color: #5D5D5D;
-  line-height: 1.4;
+  line-height: 1.5;
   margin: 0;
+  padding-right: 0.25rem;
+  max-height: 5.5rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
+.popup-buttons {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
 }
 
 .evaluate-btn {
@@ -334,6 +362,7 @@ h2[id^="secao-"]::after {
 }
 
 .ar-btn {
+  margin-top: 1rem;
   display: block;
   margin-left: auto;
   margin-right: auto;
@@ -348,9 +377,4 @@ h2[id^="secao-"]::after {
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
   cursor: pointer;
-}
-
-@keyframes slideUp {
-  from { transform: translateY(100%); }
-  to { transform: translateY(0); }
 }
