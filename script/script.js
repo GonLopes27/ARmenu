@@ -200,8 +200,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
 let lastScrollY = window.scrollY;
 
+function disablePageScroll() {
+  document.body.style.overflow = 'hidden';
+  document.body.addEventListener('touchmove', preventScroll, { passive: false });
+}
 
-// Novo: abrir popup com dados do prato
+function enablePageScroll() {
+  document.body.style.overflow = '';
+  document.body.removeEventListener('touchmove', preventScroll);
+}
+
+function preventScroll(e) {
+  e.preventDefault();
+}
+
 function showDishPopup(dish) {
   const overlay = document.getElementById("dish-popup-overlay");
   const popup = document.getElementById("dish-popup");
@@ -213,12 +225,15 @@ function showDishPopup(dish) {
 
   overlay.classList.remove("hidden");
   popup.classList.remove("hidden");
+
+  disablePageScroll();
 }
 
-// Fechar popup
 function closeDishPopup() {
   document.getElementById("dish-popup-overlay").classList.add("hidden");
   document.getElementById("dish-popup").classList.add("hidden");
+
+  enablePageScroll();
 }
 
 // Ao clicar fora
