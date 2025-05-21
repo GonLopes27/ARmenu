@@ -1,62 +1,326 @@
+
 const dishes = [
-    {
-        id: "hamburguer", // used in URL
-        name: "Hambúrguer",
-        price: "8.00€",
-        image: "assets/images/hbg.png",
-        category: "carne",
-        modelGLB: "assets/models/Duck.glb",
-        modelUSDZ: "assets/models/Duck.usdz",
-        description: "Hambúrguer de carne grelhada com queijo, servido com batatas fritas."
-    },
-    {
-        id: "panados",
-        name: "Panados de Pescada",
-        price: "8.00€",
-        image: "assets/images/pnpe.png",
-        category: "peixe",
-        modelGLB: "assets/models/Fish.glb",
-        modelUSDZ: "assets/models/Fish.usdz",
-        description: "Panados dourados de pescada acompanhados de arroz e salada."
-    },
-    {
-        id: "doce",
-        name: "Doce da Casa",
-        price: "3.50€",
-        image: "assets/images/ddc.png",
-        category: "sobremesa",
-        modelGLB: "assets/models/Doce.glb",
-        modelUSDZ: "assets/models/Doce.usdz",
-        description: "Sobremesa tradicional feita com bolacha, natas e leite condensado."
-    }
+  {
+    id: "paocommanteiga",
+    name: "Pão com Manteiga",
+    rating: "3,5",
+    price: "3,00€",
+    image: "assets/images/placeholderDuck.png",
+    description: "Pão fresco torrado servido com manteiga derretida."
+  },
+  {
+    id: "sopadelegumes",
+    name: "Sopa de Legumes",
+    rating: "3,9",
+    price: "3,50€",
+    image: "assets/images/placeholderDuck.png",
+    description: "Creme de legumes variados com temperos caseiros."
+  },
+  {
+    id: "hamburguer",
+    name: "Hambúrguer",
+    rating: "4,0",
+    price: "9,00€",
+    image: "assets/images/placeholderDuck.png",
+    description: "Sanduíche de carne grelhada com pão, vegetais e molhos."
+  },
+  {
+    id: "carnedeporcoaalentejana",
+    name: "Carne de Porco à Alentejana",
+    rating: "4,6",
+    price: "11,00€",
+    image: "assets/images/placeholderDuck.png",
+    description: "Carne de porco com amêijoas, batatas fritas e coentros."
+  },
+  {
+    id: "francesinha",
+    name: "Francesinha",
+    rating: "4,2",
+    price: "9,50€",
+    image: "assets/images/placeholderDuck.png",
+    description: "Sanduíche recheada com carnes, queijo e molho picante."
+  },
+  {
+    id: "bacalhaucomnatas",
+    name: "Bacalhau com Natas",
+    rating: "3,3",
+    price: "8,50€",
+    image: "assets/images/placeholderDuck.png",
+    description: "Bacalhau desfiado com batata, natas e queijo gratinado."
+  },
+  {
+    id: "douradagrelhada",
+    name: "Dourada Grelhada",
+    rating: "3,8",
+    price: "10,00€",
+    image: "assets/images/placeholderDuck.png",
+    description: "Dourada fresca grelhada com batatas e legumes salteados."
+  },
+  {
+    id: "salmaocommolhodelimao",
+    name: "Salmão com Molho de Limão",
+    rating: "3,9",
+    price: "11,50€",
+    image: "assets/images/placeholderDuck.png",
+    description: "Filete de salmão grelhado servido com molho leve de limão."
+  },
+  {
+    id: "docedacasa",
+    name: "Doce da Casa",
+    rating: "4,0",
+    price: "3,50€",
+    image: "assets/images/placeholderDuck.png",
+    description: "Camadas de bolacha, natas e leite condensado."
+  },
+  {
+    id: "moussedechocolate",
+    name: "Mousse de Chocolate",
+    rating: "3,9",
+    price: "3,00€",
+    image: "assets/images/placeholderDuck.png",
+    description: "Clássica mousse de chocolate negro caseira."
+  },
+  {
+    id: "tartedemaca",
+    name: "Tarte de Maçã",
+    rating: "4,1",
+    price: "3,20€",
+    image: "assets/images/placeholderDuck.png",
+    description: "Tarte caseira de maçã servida morna com canela."
+  }
 ];
 
 
-function renderDishes(category = "all") {
-    const container = document.getElementById("dish-container");
-    container.innerHTML = "";
+let isScrollingProgrammatically = false;
 
-    const filtered = category === "all"
-        ? dishes
-        : dishes.filter(d => d.category === category);
+function smoothScrollTo(targetY, duration = 600) {
+  isScrollingProgrammatically = true;
 
-    filtered.forEach(dish => {
-        const card = document.createElement("div");
-        card.className = "dish-card";
-        card.innerHTML = `
-        <img src="${dish.image}" alt="${dish.name}">
-        <h3>${dish.name}</h3>
-        <p>${dish.price}</p>
-        <a href="details.html?dish=${dish.id}" class="view-3d-btn">Ver Modelo 3D</a>
-      `;
-        container.appendChild(card);
+  const startY = window.scrollY;
+  const distance = targetY - startY;
+  const startTime = performance.now();
+
+  function step(currentTime) {
+    const elapsed = currentTime - startTime;
+    const progress = Math.min(elapsed / duration, 1);
+    const ease = progress < 0.5
+      ? 2 * progress * progress
+      : -1 + (4 - 2 * progress) * progress;
+
+    window.scrollTo(0, startY + distance * ease)
+
+    if (progress < 1) {
+      requestAnimationFrame(step);
+    } else {
+      isScrollingProgrammatically = false;
+    }
+  }
+
+  requestAnimationFrame(step);
+}
+
+window.history.scrollRestoration = 'manual';
+window.scrollTo(0, 0);
+
+document.addEventListener("DOMContentLoaded", () => {
+  const buttons = document.querySelectorAll("#category-buttons button");
+  const indicator = document.querySelector(".active-indicator");
+  const sections = document.querySelectorAll("h2[data-category]");
+  const header = document.getElementById("main-header");
+
+  function updateIndicatorPosition(activeBtn) {
+    if (!activeBtn || !indicator) return;
+    const btnRect = activeBtn.getBoundingClientRect();
+    const navRect = document.querySelector("#category-buttons").getBoundingClientRect();
+    const offset = btnRect.left - navRect.left + btnRect.width / 2 - 4;
+    indicator.style.left = `${offset}px`;
+  }
+
+  buttons.forEach(btn => {
+    btn.addEventListener("click", () => {
+      const category = btn.dataset.category;
+
+      if (category === "entradas") {
+        smoothScrollTo(0);
+      } else {
+        const section = document.getElementById(`secao-${category}`);
+        if (section) {
+          const offset = section.getBoundingClientRect().top + window.scrollY;
+          const target = Math.min(offset - 90, document.body.scrollHeight - window.innerHeight);
+          smoothScrollTo(target);
+        }
+      }
+
+      buttons.forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      updateIndicatorPosition(btn);
     });
+  });
+
+  const activeBtn = document.querySelector('#category-buttons button.active');
+  updateIndicatorPosition(activeBtn);
+
+  window.addEventListener("scroll", () => {
+    if (isScrollingProgrammatically) return;
+
+    let currentCategory = null;
+
+    sections.forEach((section, index) => {
+      const rect = section.getBoundingClientRect();
+      const isLast = index === sections.length - 1;
+      const reachedBottom = window.innerHeight + window.scrollY >= document.body.scrollHeight;
+
+      if (
+        (isLast && (rect.top <= 200 || reachedBottom)) ||
+        (!isLast && rect.top <= 150 && rect.bottom > 150)
+      ) {
+        currentCategory = section.dataset.category;
+      }
+    });
+
+    if (currentCategory) {
+      buttons.forEach(btn => {
+        const isActive = btn.dataset.category === currentCategory;
+        btn.classList.toggle("active", isActive);
+        if (isActive) updateIndicatorPosition(btn);
+      });
+    }
+
+    const currentScrollY = window.scrollY;
+    if (currentScrollY > lastScrollY && currentScrollY > 50) {
+      header.classList.add("collapsed");
+    } else {
+      header.classList.remove("collapsed");
+    }
+    lastScrollY = currentScrollY;
+  });
+
+  window.addEventListener("resize", () => {
+    const activeBtn = document.querySelector('#category-buttons button.active');
+    updateIndicatorPosition(activeBtn);
+  });
+
+  window.addEventListener("orientationchange", () => {
+    setTimeout(() => {
+      const activeBtn = document.querySelector('#category-buttons button.active');
+      updateIndicatorPosition(activeBtn);
+    }, 300);
+  });
+});
+
+let lastScrollY = window.scrollY;
+
+function disablePageScroll() {
+  document.body.style.overflow = 'hidden';
+  document.body.addEventListener('touchmove', preventScroll, { passive: false });
 }
 
-function filterDishes(category) {
-    renderDishes(category);
+function enablePageScroll() {
+  document.body.style.overflow = '';
+  document.body.removeEventListener('touchmove', preventScroll);
 }
 
-// Load all on page load
-window.onload = () => renderDishes();
+function preventScroll(e) {
+  e.preventDefault();
+}
+
+function showDishPopup(dish) {
+  const overlay = document.getElementById("dish-popup-overlay");
+  const popup = document.getElementById("dish-popup");
+
+  document.getElementById("popup-img").src = dish.image;
+  document.getElementById("popup-title").textContent = dish.name;
+  document.getElementById("popup-rating").textContent = dish.rating;
+  document.getElementById("popup-price").textContent = dish.price;
+  document.getElementById("popup-description").textContent = dish.description;
+
+  overlay.classList.remove("hidden");
+  popup.classList.remove("hidden");
+
+    popup.classList.remove('hidden');
+  overlay.classList.remove('hidden');
+
+  openPopup();
+  disablePageScroll();
+}
+
+function closeDishPopup() {
+  document.getElementById("dish-popup-overlay").classList.add("hidden");
+  document.getElementById("dish-popup").classList.add("hidden");
+
+  enablePageScroll();
+}
+
+
+document.getElementById("dish-popup-overlay").addEventListener("click", closeDishPopup);
+
+document.querySelectorAll(".dish-card").forEach((card, index) => {
+  card.addEventListener("click", () => {
+    const dish = dishes[index];
+    if (dish) {
+      showDishPopup(dish);
+    }
+  });
+});
+
+const popup = document.getElementById('dish-popup');
+const overlay = document.getElementById('dish-popup-overlay');
+const dragBar = document.querySelector('.popup-drag-bar');
+
+let startY = 0;
+let currentY = 0;
+let isDragging = false;
+
+function openPopup() {
+  popup.classList.remove('closing', 'hidden');
+  overlay.classList.remove('hidden');
+  void popup.offsetWidth; 
+  popup.classList.add('open');
+  disablePageScroll();
+}
+
+function closePopup() {
+  popup.classList.remove('open');
+  popup.classList.add('closing');
+  enablePageScroll();
+  overlay.classList.add('hidden');
+
+  popup.addEventListener('transitionend', () => {
+    if (popup.classList.contains('closing')) {
+      popup.classList.add('hidden');
+      popup.classList.remove('closing');
+      popup.style.transform = 'translateX(-50%) translateY(100%)';
+    }
+  }, { once: true });
+}
+
+overlay.addEventListener('click', closePopup);
+
+dragBar.addEventListener('touchstart', e => {
+  startY = e.touches[0].clientY;
+  isDragging = true;
+  popup.style.transition = 'none';
+});
+
+dragBar.addEventListener('touchmove', e => {
+  if (!isDragging) return;
+  currentY = e.touches[0].clientY;
+  let deltaY = currentY - startY;
+  if (deltaY > 0) {
+    popup.style.transform = `translateX(-50%) translateY(${deltaY}px)`;
+  }
+});
+
+dragBar.addEventListener('touchend', e => {
+  if (!isDragging) return;
+  isDragging = false;
+  popup.style.transition = 'transform 0.3s ease';
+
+  let deltaY = currentY - startY;
+  if (deltaY > 100) {
+    closePopup();
+  } else {
+    popup.style.transform = 'translateX(-50%) translateY(0)';
+  }
+});
 
