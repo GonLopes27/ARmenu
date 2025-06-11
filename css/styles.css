@@ -270,23 +270,33 @@ h2[id^="secao-"]::after {
 }
 
 .popup-toggle {
+  position: relative;
   display: flex;
   justify-content: center;
-  gap: 1rem;
-  font-size: 14px;
+  gap: 16px;
   font-weight: 500;
-  padding-bottom: 1rem;
+  font-size: 14px;
+  margin-bottom: 12px;
 }
 
 .popup-toggle span {
-  opacity: 0.4;
+  position: relative;
   cursor: pointer;
-  transition: opacity 0.2s ease;
+  padding: 8px 0;
+}
+
+.toggle-underline {
+  position: absolute;
+  bottom: 0;
+  height: 2px;
+  background-color: black;
+  transition: left 0.4s cubic-bezier(0.4, 0.0, 0.2, 1.0);
+  border-radius: 1px;
+  z-index: 0;
 }
 
 .popup-toggle .active {
   opacity: 1;
-  border-bottom: 2px solid #313131;
 }
 
 .popup-image {

@@ -165,6 +165,12 @@ function showDishPopup(dish) {
 
   openPopup();
   disablePageScroll();
+
+
+  setTimeout(() => {
+    const activeSpan = document.querySelector('.popup-toggle span.active');
+    if (activeSpan) updateUnderline(activeSpan);
+  }, 50);
 }
 
 function closeDishPopup() {
@@ -294,4 +300,38 @@ document.getElementById('ar-btn').addEventListener('click', () => {
   setTimeout(() => {
     newViewer.activateAR();
   }, 100);
+});
+
+const underline = document.querySelector('.toggle-underline');
+
+function updateUnderline(target) {
+  const rect = target.getBoundingClientRect();
+  const parentRect = target.parentElement.getBoundingClientRect();
+
+  underline.style.width = `${rect.width}px`;
+  underline.style.left = `${rect.left - parentRect.left}px`;
+}
+
+toggleSpans.forEach(span => {
+  span.addEventListener('click', () => {
+    toggleSpans.forEach(s => s.classList.remove('active'));
+    span.classList.add('active');
+    updateUnderline(span);
+
+    const popupImg = document.getElementById('popup-img');
+    const modelViewer = document.getElementById('popup-3d');
+
+    if (span.textContent === 'Imagem') {
+      popupImg.style.display = 'block';
+      modelViewer.style.display = 'none';
+    } else {
+      popupImg.style.display = 'none';
+      modelViewer.style.display = 'block';
+    }
+  });
+});
+
+window.addEventListener('load', () => {
+  const activeSpan = document.querySelector('.popup-toggle span.active');
+  if (activeSpan) updateUnderline(activeSpan);
 });
