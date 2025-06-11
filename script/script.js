@@ -2,11 +2,13 @@
 const dishes = [
   {
     id: "estrogonofe",
-    name: "Estrogonofe",
-    rating: "4,5",
-    price: "12,00€",
-    image: "assets/images/EstrogonofeRender.png",
-    description: "Estrogonofe de carne com molho cremoso, acompanhado de arroz e batata palha."
+  name: 'Estrogonofe',
+  image: './assets/images/EstrogonofeRender.png',
+  rating: '4,5',
+  price: '12,00€',
+  description: 'Estrogonofe de carne com molho cremoso, acompanhado de arroz e batata palha.',
+  model: './assets/models/Estrogonofe.glb',
+  modelIos: './assets/models/Estrogonofe.usdz'
   }
 ];
 
@@ -154,11 +156,12 @@ function showDishPopup(dish) {
   document.getElementById("popup-price").textContent = dish.price;
   document.getElementById("popup-description").textContent = dish.description;
 
-  overlay.classList.remove("hidden");
-  popup.classList.remove("hidden");
+  const modelViewer = document.getElementById("popup-3d");
+  modelViewer.setAttribute("src", dish.model);
+  modelViewer.setAttribute("ios-src", dish.modelIos);
 
-    popup.classList.remove('hidden');
-  overlay.classList.remove('hidden');
+  popup.classList.remove("hidden");
+  overlay.classList.remove("hidden");
 
   openPopup();
   disablePageScroll();
@@ -244,7 +247,51 @@ dragBar.addEventListener('touchend', e => {
   }
 });
 
+
+
+const toggleSpans = document.querySelectorAll('.popup-toggle span');
+const popupImg = document.getElementById('popup-img');
+const modelViewer = document.getElementById('popup-3d');
+
+toggleSpans.forEach((span, index) => {
+  span.addEventListener('click', () => {
+    toggleSpans.forEach(s => s.classList.remove('active'));
+    span.classList.add('active');
+
+    if (index === 0) {
+      popupImg.style.display = 'block';
+      modelViewer.style.display = 'none';
+    } else {
+      popupImg.style.display = 'none';
+      modelViewer.style.display = 'block';
+    }
+  });
+});
+
+
 document.getElementById('ar-btn').addEventListener('click', () => {
-  const modelViewer = document.getElementById('ar-viewer');
-  modelViewer.activateAR();
+
+  const oldViewer = document.getElementById('ar-viewer');
+  if (oldViewer) {
+    oldViewer.remove();
+  }
+
+  const newViewer = document.createElement('model-viewer');
+  newViewer.setAttribute('id', 'ar-viewer');
+  newViewer.setAttribute('src', 'assets/models/estrogonofe.glb');
+  newViewer.setAttribute('ios-src', 'assets/models/estrogonofe.usdz');
+  newViewer.setAttribute('ar', '');
+  newViewer.setAttribute('ar-modes', 'scene-viewer quick-look webxr');
+  newViewer.setAttribute('camera-controls', '');
+  newViewer.style.display = 'none';
+
+  document.body.appendChild(newViewer);
+
+  newViewer.addEventListener('load', () => {
+    newViewer.activateAR();
+  });
+
+  setTimeout(() => {
+    newViewer.activateAR();
+  }, 100);
 });

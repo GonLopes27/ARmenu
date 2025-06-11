@@ -11,7 +11,7 @@
 </head>
 
 <body>
-  <header class="main-header">
+  <header id="main-header" class="main-header">
     <div class="logo-row">
       <img src="assets/images/logo.png" class="logo-icon" />
       <span class="logo-text">Menu-AR</span>
@@ -20,8 +20,7 @@
   </header>
 
   <nav id="category-buttons" class="categoryBtns">
-    <button data-category="entradas" class="active">Entradas</button>
-    <button data-category="carne">Carne</button>
+    <button data-category="carne" class="active">Carne</button>
     <button data-category="peixe">Peixe</button>
     <button data-category="sobremesa">Sobremesas</button>
     <div class="active-indicator"></div>
@@ -45,6 +44,7 @@
     </button>
 
     <div style="height: 20vh;"></div>
+
   </main>
 
   <!-- Popup -->
@@ -60,7 +60,23 @@
 
     <div class="popup-image">
       <img src="" alt="Imagem do prato" id="popup-img">
+      <model-viewer 
+      id="popup-3d" 
+      src="" 
+      ios-src="" 
+      camera-controls
+      disable-pan 
+      disable-zoom
+      camera-orbit="0deg 55deg 0.55m" 
+      min-camera-orbit="auto 55deg 0.55m"
+      max-camera-orbit="auto 55deg 0.55m" 
+      camera-target="0m 0m 0m" 
+      style="display: none; width: 100%; height: 220px;"
+      shadow-intensity="1"
+      shadow-softness="0.45">
+      </model-viewer>
     </div>
+
 
     <div class="popup-content">
       <h3 id="popup-title">[Nome do Prato]</h3>
@@ -80,14 +96,9 @@
 
   <script src="script/script.js"></script>
 
-  <model-viewer id="ar-viewer"
-  src="assets/models/Estrogonofe.glb"
-  ios-src="assets/models/Estrogonofe.usdz"
-  ar
-  ar-modes="scene-viewer quick-look webxr"
-  camera-controls
-  style="display: none;">
-</model-viewer>
+  <model-viewer id="ar-viewer" src="assets/models/Estrogonofe.glb" ios-src="assets/models/Estrogonofe.usdz" ar
+    ar-modes="scene-viewer quick-look webxr" camera-controls style="display: none;">
+  </model-viewer>
 
 </body>
 
