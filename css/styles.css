@@ -290,8 +290,10 @@ h2[id^="secao-"]::after {
   bottom: 0;
   height: 2px;
   background-color: black;
-  transition: left 0.4s cubic-bezier(0.4, 0.0, 0.2, 1.0);
   border-radius: 1px;
+  transform-origin: center;
+  transform: scaleX(1);
+  transition: left 0.3s ease, width 0.3s ease, transform 0.3s ease;
   z-index: 0;
 }
 

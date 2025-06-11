@@ -6,7 +6,7 @@ const dishes = [
   image: './assets/images/EstrogonofeRender.png',
   rating: '4,5',
   price: '12,00€',
-  description: 'Estrogonofe de carne com molho cremoso, acompanhado de arroz e batata palha.',
+  description: 'Estrogonofe de carne com molho cremoso, acompanhado de arroz e batata frita.',
   model: './assets/models/Estrogonofe.glb',
   modelIos: './assets/models/Estrogonofe.usdz'
   }
@@ -305,12 +305,36 @@ document.getElementById('ar-btn').addEventListener('click', () => {
 const underline = document.querySelector('.toggle-underline');
 
 function updateUnderline(target) {
-  const rect = target.getBoundingClientRect();
+  const label = target.querySelector('.label');
+  const labelRect = label.getBoundingClientRect();
   const parentRect = target.parentElement.getBoundingClientRect();
 
-  underline.style.width = `${rect.width}px`;
-  underline.style.left = `${rect.left - parentRect.left}px`;
+  const newLeft = labelRect.left - parentRect.left;
+  const newWidth = labelRect.width;
+
+  underline.style.left = `${newLeft}px`;
+  underline.style.width = `${newWidth}px`;
+
+  underline.style.transform = 'scaleX(0.8)';
+  requestAnimationFrame(() => {
+    underline.style.transform = 'scaleX(1)';
+  });
 }
+
+underline.addEventListener('transitionend', (e) => {
+  if (e.propertyName === 'left') {
+    const activeSpan = document.querySelector('.popup-toggle span.active');
+    if (activeSpan?.textContent === '3D') {
+      const modelViewer = document.getElementById('popup-3d');
+
+      if (!modelViewer.getAttribute('src')) {
+        modelViewer.setAttribute('src', dishes[0].model);
+        modelViewer.setAttribute('ios-src', dishes[0].modelIos);
+        modelViewer.style.display = 'block';
+      }
+    }
+  }
+});
 
 toggleSpans.forEach(span => {
   span.addEventListener('click', () => {
@@ -324,12 +348,15 @@ toggleSpans.forEach(span => {
     if (span.textContent === 'Imagem') {
       popupImg.style.display = 'block';
       modelViewer.style.display = 'none';
+
+      modelViewer.removeAttribute('src');
+      modelViewer.removeAttribute('ios-src');
     } else {
       popupImg.style.display = 'none';
-      modelViewer.style.display = 'block';
     }
   });
 });
+
 
 window.addEventListener('load', () => {
   const activeSpan = document.querySelector('.popup-toggle span.active');
