@@ -1,92 +1,12 @@
 
 const dishes = [
   {
-    id: "paocommanteiga",
-    name: "Pão com Manteiga",
-    rating: "3,5",
-    price: "3,00€",
-    image: "assets/images/placeholderDuck.png",
-    description: "Pão fresco torrado servido com manteiga derretida."
-  },
-  {
-    id: "sopadelegumes",
-    name: "Sopa de Legumes",
-    rating: "3,9",
-    price: "3,50€",
-    image: "assets/images/placeholderDuck.png",
-    description: "Creme de legumes variados com temperos caseiros."
-  },
-  {
-    id: "hamburguer",
-    name: "Hambúrguer",
-    rating: "4,0",
-    price: "9,00€",
-    image: "assets/images/placeholderDuck.png",
-    description: "Sanduíche de carne grelhada com pão, vegetais e molhos."
-  },
-  {
-    id: "carnedeporcoaalentejana",
-    name: "Carne de Porco à Alentejana",
-    rating: "4,6",
-    price: "11,00€",
-    image: "assets/images/placeholderDuck.png",
-    description: "Carne de porco com amêijoas, batatas fritas e coentros."
-  },
-  {
-    id: "francesinha",
-    name: "Francesinha",
-    rating: "4,2",
-    price: "9,50€",
-    image: "assets/images/placeholderDuck.png",
-    description: "Sanduíche recheada com carnes, queijo e molho picante."
-  },
-  {
-    id: "bacalhaucomnatas",
-    name: "Bacalhau com Natas",
-    rating: "3,3",
-    price: "8,50€",
-    image: "assets/images/placeholderDuck.png",
-    description: "Bacalhau desfiado com batata, natas e queijo gratinado."
-  },
-  {
-    id: "douradagrelhada",
-    name: "Dourada Grelhada",
-    rating: "3,8",
-    price: "10,00€",
-    image: "assets/images/placeholderDuck.png",
-    description: "Dourada fresca grelhada com batatas e legumes salteados."
-  },
-  {
-    id: "salmaocommolhodelimao",
-    name: "Salmão com Molho de Limão",
-    rating: "3,9",
-    price: "11,50€",
-    image: "assets/images/placeholderDuck.png",
-    description: "Filete de salmão grelhado servido com molho leve de limão."
-  },
-  {
-    id: "docedacasa",
-    name: "Doce da Casa",
-    rating: "4,0",
-    price: "3,50€",
-    image: "assets/images/placeholderDuck.png",
-    description: "Camadas de bolacha, natas e leite condensado."
-  },
-  {
-    id: "moussedechocolate",
-    name: "Mousse de Chocolate",
-    rating: "3,9",
-    price: "3,00€",
-    image: "assets/images/placeholderDuck.png",
-    description: "Clássica mousse de chocolate negro caseira."
-  },
-  {
-    id: "tartedemaca",
-    name: "Tarte de Maçã",
-    rating: "4,1",
-    price: "3,20€",
-    image: "assets/images/placeholderDuck.png",
-    description: "Tarte caseira de maçã servida morna com canela."
+    id: "estrogonofe",
+    name: "Estrogonofe",
+    rating: "4,5",
+    price: "12,00€",
+    image: "assets/images/EstrogonofeRender.png",
+    description: "Estrogonofe de carne com molho cremoso, acompanhado de arroz e batata palha."
   }
 ];
 
@@ -324,3 +244,7 @@ dragBar.addEventListener('touchend', e => {
   }
 });
 
+document.getElementById('ar-btn').addEventListener('click', () => {
+  const modelViewer = document.getElementById('ar-viewer');
+  modelViewer.activateAR();
+});
