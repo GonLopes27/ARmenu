@@ -284,8 +284,8 @@ document.getElementById('ar-btn').addEventListener('click', () => {
 
   const newViewer = document.createElement('model-viewer');
   newViewer.setAttribute('id', 'ar-viewer');
-  newViewer.setAttribute('src', 'assets/models/Duck.glb');
-  newViewer.setAttribute('ios-src', 'assets/models/Duck.usdz');
+  newViewer.setAttribute('src', 'assets/models/Estrogonofe.glb');
+  newViewer.setAttribute('ios-src', 'assets/models/Estrogonofe.usdz');
   newViewer.setAttribute('ar', '');
   newViewer.setAttribute('ar-modes', 'scene-viewer quick-look webxr');
   newViewer.setAttribute('camera-controls', '');
