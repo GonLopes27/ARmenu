@@ -219,25 +219,49 @@ h2[id^="secao-"]::after {
 
 
 
+
 /* POP-UP DETALHES DO PRATO */
 
-.popup-overlay {
+#popup-overlay {
   position: fixed;
   inset: 0;
   background-color: rgba(0,0,0,0.3);
   z-index: 99;
 }
 
+#info-popup-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 99;
+  display: none;
+}
+
+
 .dish-popup {
   position: fixed;
   bottom: 0;
-  left: 50%;
-  transform: translateX(-50%) translateY(100%);
+  left: 5%;
   width: 90vw;
-  height: 80vh;
+  height: 80vh; 
   max-height: 90vh;
   background: #fff;
   border-radius: 16px 16px 0 0;
+  padding: 1rem 2rem;
+  box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.1);
+  z-index: 99;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease;
+}
+
+.info-popup {
+  position: fixed;
+  bottom: 0;
+  width: 90vw;
+  height: 75vh;
+  background: #fff;
+  border-radius: 16px;
   padding: 1rem 2rem;
   box-shadow: 0 -4px 10px rgba(0,0,0,0.1);
   z-index: 99;
@@ -246,27 +270,12 @@ h2[id^="secao-"]::after {
   transition: transform 0.3s ease;
 }
 
-
-.dish-popup.open {
-  transform: translateX(-50%) translateY(0);
-}
-
-.dish-popup.closing {
-  transform: translateX(-50%) translateY(100%);
-}
-
-.hidden {
-  display: none;
-}
-
 .popup-drag-bar {
   width: 50px;
   height: 5px;
   background-color: #D9D9D9;
   border-radius: 2.5px;
   margin: 0 auto 1.5rem auto;
-  cursor: grab;
-  touch-action: none;
 }
 
 .popup-toggle {
@@ -373,4 +382,8 @@ h2[id^="secao-"]::after {
   cursor: pointer;
   margin-left: auto;
   margin-right: auto;
+}
+
+.hidden {
+  display: none;
 }

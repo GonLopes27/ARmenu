@@ -147,7 +147,7 @@ function preventScroll(e) {
 }
 
 function showDishPopup(dish) {
-  const overlay = document.getElementById("dish-popup-overlay");
+  const overlay = document.getElementById("popup-overlay");
   const popup = document.getElementById("dish-popup");
 
   document.getElementById("popup-img").src = dish.image;
@@ -173,15 +173,6 @@ function showDishPopup(dish) {
   }, 50);
 }
 
-function closeDishPopup() {
-  document.getElementById("dish-popup-overlay").classList.add("hidden");
-  document.getElementById("dish-popup").classList.add("hidden");
-
-  enablePageScroll();
-}
-
-
-document.getElementById("dish-popup-overlay").addEventListener("click", closeDishPopup);
 
 document.querySelectorAll(".dish-card").forEach((card, index) => {
   card.addEventListener("click", () => {
@@ -193,71 +184,58 @@ document.querySelectorAll(".dish-card").forEach((card, index) => {
 });
 
 const popup = document.getElementById('dish-popup');
-const overlay = document.getElementById('dish-popup-overlay');
-const dragBar = document.querySelector('.popup-drag-bar');
+const infoPopup = document.getElementById('info-popup')
+const overlay = document.getElementById('popup-overlay');
 
 let startY = 0;
 let currentY = 0;
-let isDragging = false;
 
 function openPopup() {
-  popup.classList.remove('closing', 'hidden');
+  popup.style.transform = 'translateY(100%)';
   overlay.classList.remove('hidden');
-  void popup.offsetWidth; 
-  popup.classList.add('open');
+
+  void popup.offsetWidth;
+
+  popup.style.transition = 'transform 0.3s ease';
+  popup.style.transform = 'translateY(0)';
+
   disablePageScroll();
 }
 
 function closePopup() {
-  popup.classList.remove('open');
-  popup.classList.add('closing');
-  enablePageScroll();
   overlay.classList.add('hidden');
+  
+  popup.style.transition = 'transform 0.3s ease';
+  popup.style.transform = 'translateY(100%)';
 
-  popup.addEventListener('transitionend', () => {
-    if (popup.classList.contains('closing')) {
-      popup.classList.add('hidden');
-      popup.classList.remove('closing');
-      popup.style.transform = 'translateX(-50%) translateY(100%)';
-    }
-  }, { once: true });
+  enablePageScroll();
+}
+
+function closeInfoPopup() {
+  infoPopup.classList.remove('open');
+  infoPopup.classList.add('hidden');
+  overlay.classList.add('hidden');
+  enablePageScroll();
+}
+
+function openInfoPopup() {
+  infoPopup.classList.remove('hidden');
+  overlay.classList.remove('hidden');
+  void infoPopup.offsetWidth; 
+  infoPopup.classList.add('open');
+  disablePageScroll();
 }
 
 overlay.addEventListener('click', closePopup);
-
-dragBar.addEventListener('touchstart', e => {
-  startY = e.touches[0].clientY;
-  isDragging = true;
-  popup.style.transition = 'none';
-});
-
-dragBar.addEventListener('touchmove', e => {
-  if (!isDragging) return;
-  currentY = e.touches[0].clientY;
-  let deltaY = currentY - startY;
-  if (deltaY > 0) {
-    popup.style.transform = `translateX(-50%) translateY(${deltaY}px)`;
-  }
-});
-
-dragBar.addEventListener('touchend', e => {
-  if (!isDragging) return;
-  isDragging = false;
-  popup.style.transition = 'transform 0.3s ease';
-
-  let deltaY = currentY - startY;
-  if (deltaY > 100) {
-    closePopup();
-  } else {
-    popup.style.transform = 'translateX(-50%) translateY(0)';
-  }
-});
-
+overlay.addEventListener('click', closeInfoPopup);
 
 
 const toggleSpans = document.querySelectorAll('.popup-toggle span');
 const popupImg = document.getElementById('popup-img');
 const modelViewer = document.getElementById('popup-3d');
+const infoBtn = document.getElementById('infoBtn')
+
+infoBtn.addEventListener('click', openInfoPopup);
 
 toggleSpans.forEach((span, index) => {
   span.addEventListener('click', () => {

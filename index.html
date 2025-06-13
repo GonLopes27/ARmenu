@@ -16,7 +16,7 @@
       <img src="assets/images/logo.png" class="logo-icon" />
       <span class="logo-text">Menu-AR</span>
     </div>
-    <img src="assets/images/info.png" class="info-icon" alt="Informações">
+    <img src="assets/images/info.png" class="info-icon" alt="Informações" id="infoBtn">
   </header>
 
   <nav id="category-buttons" class="categoryBtns">
@@ -47,17 +47,19 @@
 
   </main>
 
-  <!-- Popup -->
-  <div id="dish-popup-overlay" class="popup-overlay hidden"></div>
+
+  <!-- Detalhes da Comida Popup -->
+
+  <div id="popup-overlay" class="popup-overlay hidden"></div>
 
   <div id="dish-popup" class="dish-popup hidden">
     <div class="popup-drag-bar"></div>
 
-<div class="popup-toggle">
-  <span class="active"><span class="label">Imagem</span></span>
-  <span><span class="label">3D</span></span>
-  <div class="toggle-underline"></div>
-</div>
+    <div class="popup-toggle">
+      <span class="active"><span class="label">Imagem</span></span>
+      <span><span class="label">3D</span></span>
+      <div class="toggle-underline"></div>
+    </div>
 
     <div class="popup-image">
       <img src="" alt="Imagem do prato" id="popup-img">
@@ -78,7 +80,6 @@
       </model-viewer>
     </div>
 
-
     <div class="popup-content">
       <h3 id="popup-title">[Nome do Prato]</h3>
       <div class="popup-meta">
@@ -95,11 +96,21 @@
     </div>
   </div>
 
-  <script src="script/script.js"></script>
+    <!-- Informaçoes Popup -->
 
+  <div id="info-popup-overlay" class="info-popup-overlay hidden"></div>
+
+  <div id="info-popup" class="info-popup hidden">
+      <p>Mequie</p>
+  </div>
+
+
+  <!-- AR -->
   <model-viewer id="ar-viewer" src="" ios-src="" ar
     ar-modes="scene-viewer quick-look webxr" camera-controls style="display: none;">
   </model-viewer>
+
+  <script src="script/script.js"></script>
 
 </body>
 
