@@ -133,12 +133,10 @@ document.addEventListener("DOMContentLoaded", () => {
 let lastScrollY = window.scrollY;
 
 function disablePageScroll() {
-  document.body.style.overflow = 'hidden';
   document.body.addEventListener('touchmove', preventScroll, { passive: false });
 }
 
 function enablePageScroll() {
-  document.body.style.overflow = '';
   document.body.removeEventListener('touchmove', preventScroll);
 }
 
@@ -191,6 +189,7 @@ let startY = 0;
 let currentY = 0;
 
 function openPopup() {
+
   popup.style.transform = 'translateY(100%)';
   overlay.classList.remove('hidden');
 
@@ -203,10 +202,10 @@ function openPopup() {
 }
 
 function closePopup() {
-  overlay.classList.add('hidden');
-  
   popup.style.transition = 'transform 0.3s ease';
   popup.style.transform = 'translateY(100%)';
+
+  overlay.classList.add('hidden');
 
   enablePageScroll();
 }
