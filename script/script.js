@@ -2,13 +2,13 @@
 const dishes = [
   {
     id: "estrogonofe",
-  name: 'Estrogonofe',
-  image: './assets/images/EstrogonofeRender.png',
-  rating: '4,5',
-  price: '12,00€',
-  description: 'Estrogonofe de carne com molho cremoso, acompanhado de arroz e batata frita.',
-  model: './assets/models/Estrogonofe.glb',
-  modelIos: './assets/models/Estrogonofe.usdz'
+    name: 'Estrogonofe',
+    image: './assets/images/EstrogonofeRender.png',
+    rating: '4,5',
+    price: '12,00€',
+    description: 'Estrogonofe de carne com molho cremoso, acompanhado de arroz e batata frita.',
+    model: './assets/models/Estrogonofe.glb',
+    modelIos: './assets/models/Estrogonofe.usdz'
   }
 ];
 
@@ -144,40 +144,44 @@ function preventScroll(e) {
   e.preventDefault();
 }
 
-function showDishPopup(dish) {
-  const overlay = document.getElementById("popup-overlay");
-  const popup = document.getElementById("dish-popup");
+function showDishPopup(dishId) {
+  const dish = dishes.find(d => d.id === dishId);
 
-  document.getElementById("popup-img").src = dish.image;
-  document.getElementById("popup-title").textContent = dish.name;
-  document.getElementById("popup-rating").textContent = dish.rating;
-  document.getElementById("popup-price").textContent = dish.price;
-  document.getElementById("popup-description").textContent = dish.description;
+  if (dish) {
+    const overlay = document.getElementById("popup-overlay");
+    const popup = document.getElementById("dish-popup");
 
-  const modelViewer = document.getElementById("popup-3d");
-  modelViewer.setAttribute("src", dish.model);
-  modelViewer.setAttribute("ios-src", dish.modelIos);
+    document.getElementById("popup-img").src = dish.image;
+    document.getElementById("popup-title").textContent = dish.name;
+    document.getElementById("popup-rating").textContent = dish.rating;
+    document.getElementById("popup-price").textContent = dish.price;
+    document.getElementById("popup-description").textContent = dish.description;
 
-  popup.classList.remove("hidden");
-  overlay.classList.remove("hidden");
+    const modelViewer = document.getElementById("popup-3d");
+    modelViewer.setAttribute("src", dish.model);
+    modelViewer.setAttribute("ios-src", dish.modelIos);
 
-  openPopup();
-  disablePageScroll();
+    popup.classList.remove("hidden");
+    overlay.classList.remove("hidden");
 
+    openPopup();
+    disablePageScroll();
 
-  setTimeout(() => {
-    const activeSpan = document.querySelector('.popup-toggle span.active');
-    if (activeSpan) updateUnderline(activeSpan);
-  }, 50);
+    setTimeout(() => {
+      const activeSpan = document.querySelector('.popup-toggle span.active');
+      if (activeSpan) updateUnderline(activeSpan);
+    }, 50);
+  }
 }
 
 
-document.querySelectorAll(".dish-card").forEach((card, index) => {
+document.querySelectorAll('.dish-card').forEach(card => {
   card.addEventListener("click", () => {
-    const dish = dishes[index];
-    if (dish) {
-      showDishPopup(dish);
-    }
+    const dishId = card.getAttribute('data-id');
+
+    console.log("Prato clicado:", dishId);
+
+    showDishPopup(dishId);
   });
 });
 
@@ -220,7 +224,7 @@ function closeInfoPopup() {
 function openInfoPopup() {
   infoPopup.classList.remove('hidden');
   overlay.classList.remove('hidden');
-  void infoPopup.offsetWidth; 
+  void infoPopup.offsetWidth;
   infoPopup.classList.add('open');
   disablePageScroll();
 }
@@ -281,6 +285,14 @@ document.getElementById('ar-btn').addEventListener('click', () => {
 
 const underline = document.querySelector('.toggle-underline');
 
+window.addEventListener('load', () => {
+  const firstSpan = document.querySelector('.popup-toggle span');
+  if (!firstSpan.classList.contains('active')) {
+    firstSpan.classList.add('active');
+  }
+  updateUnderline(firstSpan);
+});
+
 function updateUnderline(target) {
   const label = target.querySelector('.label');
   const labelRect = label.getBoundingClientRect();
@@ -299,14 +311,17 @@ function updateUnderline(target) {
 }
 
 underline.addEventListener('transitionend', (e) => {
-  if (e.propertyName === 'left') {
+  if (e.propertyName === 'transform') {
     const activeSpan = document.querySelector('.popup-toggle span.active');
-    if (activeSpan?.textContent === '3D') {
-      const modelViewer = document.getElementById('popup-3d');
+    const dishId = activeSpan?.textContent.toLowerCase();
 
+    const dish = dishes.find(d => d.id === dishId);
+
+    if (dish && activeSpan?.textContent === '3D') {
+      const modelViewer = document.getElementById('popup-3d');
       if (!modelViewer.getAttribute('src')) {
-        modelViewer.setAttribute('src', dishes[0].model);
-        modelViewer.setAttribute('ios-src', dishes[0].modelIos);
+        modelViewer.setAttribute('src', dish.model);
+        modelViewer.setAttribute('ios-src', dish.modelIos);
         modelViewer.style.display = 'block';
       }
     }
@@ -325,17 +340,11 @@ toggleSpans.forEach(span => {
     if (span.textContent === 'Imagem') {
       popupImg.style.display = 'block';
       modelViewer.style.display = 'none';
-
-      modelViewer.removeAttribute('src');
-      modelViewer.removeAttribute('ios-src');
     } else {
       popupImg.style.display = 'none';
+      modelViewer.style.display = 'block';
     }
   });
 });
 
 
-window.addEventListener('load', () => {
-  const activeSpan = document.querySelector('.popup-toggle span.active');
-  if (activeSpan) updateUnderline(activeSpan);
-});
