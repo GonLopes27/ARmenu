@@ -199,14 +199,14 @@ function openPopup() {
 
   void popup.offsetWidth;
 
-  popup.style.transition = 'transform 0.3s ease';
+  popup.style.transition = 'transform 0.4s ease';
   popup.style.transform = 'translateY(0)';
 
   disablePageScroll();
 }
 
 function closePopup() {
-  popup.style.transition = 'transform 0.3s ease';
+  popup.style.transition = 'transform 0.4s ease';
   popup.style.transform = 'translateY(100%)';
 
   overlay.classList.add('hidden');
@@ -215,10 +215,13 @@ function closePopup() {
 }
 
 function closeInfoPopup() {
-  infoPopup.classList.remove('open');
-  infoPopup.classList.add('hidden');
+  infoPopup.style.transition = 'transform 0.4s ease';
+  infoPopup.style.transform = 'translateX(105%)';
+
   overlay.classList.add('hidden');
+
   enablePageScroll();
+
 }
 
 function openInfoPopup() {
@@ -226,6 +229,7 @@ function openInfoPopup() {
   overlay.classList.remove('hidden');
   void infoPopup.offsetWidth;
   infoPopup.classList.add('open');
+  
   disablePageScroll();
 }
 
@@ -237,8 +241,10 @@ const toggleSpans = document.querySelectorAll('.popup-toggle span');
 const popupImg = document.getElementById('popup-img');
 const modelViewer = document.getElementById('popup-3d');
 const infoBtn = document.getElementById('infoBtn')
+const closeBtn = document.getElementById('close-info')
 
 infoBtn.addEventListener('click', openInfoPopup);
+closeBtn.addEventListener('click', closeInfoPopup);
 
 toggleSpans.forEach((span, index) => {
   span.addEventListener('click', () => {

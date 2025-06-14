@@ -255,22 +255,6 @@ h2[id^="secao-"]::after {
   transition: transform 0.3s ease;
 }
 
-.info-popup {
-  position: fixed;
-  bottom: 7.5%;
-  left: 5%;
-  width: 90vw;
-  height: 75vh;
-  background: #fff;
-  border-radius: 16px;
-  padding: 1rem 2rem;
-  box-shadow: 0 -4px 10px rgba(0,0,0,0.1);
-  z-index: 99;
-  display: flex;
-  flex-direction: column;
-  transition: transform 0.3s ease;
-}
-
 .popup-drag-bar {
   width: 50px;
   height: 5px;
@@ -383,6 +367,91 @@ h2[id^="secao-"]::after {
   cursor: pointer;
   margin-left: auto;
   margin-right: auto;
+}
+
+.info-popup {
+  position: fixed;
+  bottom: 7.5%;
+  left: 5%;
+  width: 90vw;
+  height: 75vh;
+  background: #fff;
+  border-radius: 16px;
+  padding: 1.5rem 2rem;
+  box-shadow: 0 -4px 10px rgba(0,0,0,0.1);
+  z-index: 99;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease;
+  align-items: center;
+  text-align: center;
+}
+
+h2 {
+  color:#313131;
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin-bottom: 1.5rem;
+}
+
+.sub {
+  color: #6D6D6D;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+.dev {
+  margin-top: 0.8rem;
+  color: #6D6D6D;
+  font-size: 0.9rem;
+}
+
+.section-title {
+  color: #313131;
+  font-weight: 500;
+  font-size: 1rem;
+  margin-top: 1.5rem;
+  margin-bottom: 0.25rem;
+}
+
+.content-left {
+  width: 100%;
+  text-align: left;
+}
+
+.objective-text {
+  font-size: 0.9rem;
+  color: #6D6D6D;
+  font-weight: 400;
+  margin-bottom: 0.25rem;
+  text-align: left;
+}
+
+ul {
+  list-style: disc;
+  padding-left: 1.25rem;
+  margin: 0;
+  text-align: left;
+}
+
+ul li {
+  font-size: 0.9rem;
+  color: #6D6D6D;
+  font-weight: 400;
+  margin-bottom: 0.25rem;
+}
+
+.closeBtn {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 0.6rem 1.5rem;
+  border: none;
+  background: transparent;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
 }
 
 .hidden {
