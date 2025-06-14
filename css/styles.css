@@ -372,7 +372,7 @@ h2[id^="secao-"]::after {
 .info-popup {
   position: fixed;
   bottom: 7.5%;
-  left: 5%;
+  right: 5%;
   width: 90vw;
   height: 75vh;
   background: #fff;
@@ -385,7 +385,9 @@ h2[id^="secao-"]::after {
   transition: transform 0.3s ease;
   align-items: center;
   text-align: center;
+  transform: translateX(100%);
 }
+
 
 h2 {
   color:#313131;

@@ -216,20 +216,22 @@ function closePopup() {
 
 function closeInfoPopup() {
   infoPopup.style.transition = 'transform 0.4s ease';
-  infoPopup.style.transform = 'translateX(105%)';
+  infoPopup.style.transform = 'translateX(107.5%)';
 
   overlay.classList.add('hidden');
-
   enablePageScroll();
-
 }
 
 function openInfoPopup() {
   infoPopup.classList.remove('hidden');
   overlay.classList.remove('hidden');
-  void infoPopup.offsetWidth;
-  infoPopup.classList.add('open');
   
+  void infoPopup.offsetWidth;
+
+  infoPopup.style.transform = 'translateX(0%)';
+
+  infoPopup.classList.add('open');
+
   disablePageScroll();
 }
 
