@@ -391,19 +391,19 @@ h2[id^="secao-"]::after {
 
 h2 {
   color:#313131;
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   font-weight: 500;
   margin-bottom: 1.5rem;
 }
 
 .sub {
   color: #6D6D6D;
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   margin-bottom: 1rem;
 }
 
 .dev {
-  margin-top: 0.8rem;
+  margin-top: 0.7rem;
   color: #6D6D6D;
   font-size: 0.9rem;
 }
@@ -411,7 +411,7 @@ h2 {
 .section-title {
   color: #313131;
   font-weight: 500;
-  font-size: 1rem;
+  font-size: 0.9rem;
   margin-top: 1.5rem;
   margin-bottom: 0.25rem;
 }
@@ -422,7 +422,7 @@ h2 {
 }
 
 .objective-text {
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   color: #6D6D6D;
   font-weight: 400;
   margin-bottom: 0.25rem;
@@ -437,7 +437,7 @@ ul {
 }
 
 ul li {
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   color: #6D6D6D;
   font-weight: 400;
   margin-bottom: 0.25rem;
