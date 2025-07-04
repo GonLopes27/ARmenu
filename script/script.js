@@ -9,6 +9,16 @@ const dishes = [
     description: 'Estrogonofe de carne com molho cremoso, acompanhado de arroz e batata frita.',
     model: './assets/models/Estrogonofe.glb',
     modelIos: './assets/models/Estrogonofe.usdz'
+  },
+    {
+    id: "cachorro",
+    name: 'Cachorro Especial',
+    image: './assets/images/CachorroRendered.png',
+    rating: '3,9',
+    price: '7,00€',
+    description: 'Cachorro quente com molho de francesinha no Prato.',
+    model: './assets/models/Cachorro.glb',
+    modelIos: './assets/models/Cachorro.usdz'
   }
 ];
 
@@ -265,30 +275,36 @@ toggleSpans.forEach((span, index) => {
 
 
 document.getElementById('ar-btn').addEventListener('click', () => {
+  const activeSpan = document.querySelector('.popup-toggle span.active');
+  const dishId = activeSpan?.textContent.toLowerCase();
+  
+  const dish = dishes.find(d => d.id === dishId);
 
-  const oldViewer = document.getElementById('ar-viewer');
-  if (oldViewer) {
-    oldViewer.remove();
+  if (dish) {
+    const oldViewer = document.getElementById('ar-viewer');
+    if (oldViewer) {
+      oldViewer.remove();
+    }
+
+    const newViewer = document.createElement('model-viewer');
+    newViewer.setAttribute('id', 'ar-viewer');
+    newViewer.setAttribute('src', dish.model);
+    newViewer.setAttribute('ios-src', dish.modelIos);
+    newViewer.setAttribute('ar', '');
+    newViewer.setAttribute('ar-modes', 'scene-viewer quick-look webxr');
+    newViewer.setAttribute('camera-controls', '');
+    newViewer.style.display = 'none';
+
+    document.body.appendChild(newViewer);
+
+    newViewer.addEventListener('load', () => {
+      newViewer.activateAR();
+    });
+
+    setTimeout(() => {
+      newViewer.activateAR();
+    }, 100);
   }
-
-  const newViewer = document.createElement('model-viewer');
-  newViewer.setAttribute('id', 'ar-viewer');
-  newViewer.setAttribute('src', 'assets/models/Estrogonofe.glb');
-  newViewer.setAttribute('ios-src', 'assets/models/Estrogonofe.usdz');
-  newViewer.setAttribute('ar', '');
-  newViewer.setAttribute('ar-modes', 'scene-viewer quick-look webxr');
-  newViewer.setAttribute('camera-controls', '');
-  newViewer.style.display = 'none';
-
-  document.body.appendChild(newViewer);
-
-  newViewer.addEventListener('load', () => {
-    newViewer.activateAR();
-  });
-
-  setTimeout(() => {
-    newViewer.activateAR();
-  }, 100);
 });
 
 const underline = document.querySelector('.toggle-underline');
