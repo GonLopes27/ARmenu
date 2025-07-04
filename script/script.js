@@ -19,6 +19,16 @@ const dishes = [
     description: 'Cachorro quente com molho de francesinha no Prato.',
     model: './assets/models/Cachorro.glb',
     modelIos: './assets/models/Cachorro.usdz'
+  },
+  {
+    id: "douradinhos",
+    name: 'Filetes de Pescada com Arroz',
+    image: './assets/images/DouradinhosRendered.png',
+    rating: '3,0',
+    price: '5,00€',
+    description: 'Filetes de Pescada do Capitão Iglo servidos com arroz.',
+    model: './assets/models/DouradinhosClean.glb',
+    modelIos: './assets/models/DouradinhosClean.usdz'
   }
 ];
 
