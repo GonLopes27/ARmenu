@@ -10,7 +10,7 @@ const dishes = [
     model: './assets/models/Estrogonofe.glb',
     modelIos: './assets/models/Estrogonofe.usdz'
   },
-    {
+  {
     id: "cachorro",
     name: 'Cachorro Especial',
     image: './assets/images/CachorroRendered.png',
@@ -184,15 +184,51 @@ function showDishPopup(dishId) {
   }
 }
 
+let selectedDishId = null;
 
 document.querySelectorAll('.dish-card').forEach(card => {
   card.addEventListener("click", () => {
-    const dishId = card.getAttribute('data-id');
 
-    console.log("Prato clicado:", dishId);
+    selectedDishId = card.getAttribute('data-id');
 
-    showDishPopup(dishId);
+    showDishPopup(selectedDishId);
   });
+});
+
+document.getElementById('ar-btn').addEventListener('click', () => {
+
+  if (!selectedDishId) {
+    console.error("Nenhum prato selecionado.");
+    return;
+  }
+
+  const dish = dishes.find(d => d.id === selectedDishId);
+
+  if (dish) {
+    const oldViewer = document.getElementById('ar-viewer');
+    if (oldViewer) {
+      oldViewer.remove();
+    }
+
+    const newViewer = document.createElement('model-viewer');
+    newViewer.setAttribute('id', 'ar-viewer');
+    newViewer.setAttribute('src', dish.model);
+    newViewer.setAttribute('ios-src', dish.modelIos);
+    newViewer.setAttribute('ar', '');
+    newViewer.setAttribute('ar-modes', 'scene-viewer quick-look webxr');
+    newViewer.setAttribute('camera-controls', '');
+    newViewer.style.display = 'none';
+
+    document.body.appendChild(newViewer);
+
+    newViewer.addEventListener('load', () => {
+      newViewer.activateAR();
+    });
+
+    setTimeout(() => {
+      newViewer.activateAR();
+    }, 100);
+  }
 });
 
 const popup = document.getElementById('dish-popup');
@@ -235,7 +271,7 @@ function closeInfoPopup() {
 function openInfoPopup() {
   infoPopup.classList.remove('hidden');
   overlay.classList.remove('hidden');
-  
+
   void infoPopup.offsetWidth;
 
   infoPopup.style.transform = 'translateX(0%)';
@@ -273,39 +309,6 @@ toggleSpans.forEach((span, index) => {
   });
 });
 
-
-document.getElementById('ar-btn').addEventListener('click', () => {
-  const activeSpan = document.querySelector('.popup-toggle span.active');
-  const dishId = activeSpan?.textContent.toLowerCase();
-  
-  const dish = dishes.find(d => d.id === dishId);
-
-  if (dish) {
-    const oldViewer = document.getElementById('ar-viewer');
-    if (oldViewer) {
-      oldViewer.remove();
-    }
-
-    const newViewer = document.createElement('model-viewer');
-    newViewer.setAttribute('id', 'ar-viewer');
-    newViewer.setAttribute('src', dish.model);
-    newViewer.setAttribute('ios-src', dish.modelIos);
-    newViewer.setAttribute('ar', '');
-    newViewer.setAttribute('ar-modes', 'scene-viewer quick-look webxr');
-    newViewer.setAttribute('camera-controls', '');
-    newViewer.style.display = 'none';
-
-    document.body.appendChild(newViewer);
-
-    newViewer.addEventListener('load', () => {
-      newViewer.activateAR();
-    });
-
-    setTimeout(() => {
-      newViewer.activateAR();
-    }, 100);
-  }
-});
 
 const underline = document.querySelector('.toggle-underline');
 
