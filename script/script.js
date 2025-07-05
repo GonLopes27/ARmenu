@@ -84,7 +84,7 @@ document.addEventListener("DOMContentLoaded", () => {
     btn.addEventListener("click", () => {
       const category = btn.dataset.category;
 
-      if (category === "entradas") {
+      if (category === "carne") {
         smoothScrollTo(0);
       } else {
         const section = document.getElementById(`secao-${category}`);
@@ -189,6 +189,15 @@ function closePopup() {
   popup.style.transform = 'translateY(100%)';
 
   overlay.classList.add('hidden');
+
+  const firstSpan = document.querySelector('.popup-toggle span');
+  if (!firstSpan.classList.contains('active')) {
+    firstSpan.classList.add('active');
+  }
+  updateUnderline(firstSpan);
+
+  popupImg.style.display = 'block';
+  modelViewer.style.display = 'none';
 
   enablePageScroll();
 }
