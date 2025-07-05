@@ -15,7 +15,7 @@ const dishes = [
     name: 'Cachorro Especial',
     image: './assets/images/CachorroRendered.png',
     rating: '3,9',
-    price: '7,00€',
+    price: '8,50€',
     description: 'Cachorro quente com molho de francesinha no Prato.',
     model: './assets/models/Cachorro.glb',
     modelIos: './assets/models/Cachorro.usdz'
@@ -25,7 +25,7 @@ const dishes = [
     name: 'Filetes de Pescada com Arroz',
     image: './assets/images/DouradinhosRendered.png',
     rating: '3,0',
-    price: '5,00€',
+    price: '6,00€',
     description: 'Filetes de Pescada do Capitão Iglo servidos com arroz.',
     model: './assets/models/DouradinhosClean.glb',
     modelIos: './assets/models/DouradinhosClean.usdz'
@@ -141,13 +141,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
   window.addEventListener("resize", () => {
     const activeBtn = document.querySelector('#category-buttons button.active');
+    const activeSpan = document.querySelector('.popup-toggle span.active');
     updateIndicatorPosition(activeBtn);
+    updateUnderline(activeSpan);
   });
 
   window.addEventListener("orientationchange", () => {
     setTimeout(() => {
       const activeBtn = document.querySelector('#category-buttons button.active');
+      const activeSpan = document.querySelector('.popup-toggle span.active');
       updateIndicatorPosition(activeBtn);
+      updateUnderline(activeSpan);
     }, 300);
   });
 });
