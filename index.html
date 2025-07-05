@@ -90,25 +90,28 @@
   <div id="popup-overlay" class="popup-overlay hidden"></div>
 
   <div id="dish-popup" class="dish-popup hidden">
+    <!-- Cabeçalho do Popup -->
+    <div class="popup-header">
+      <div class="popup-drag-bar"></div>
 
-    <div class="popup-drag-bar"></div>
-
-    <div class="popup-toggle">
-      <span class="active"><span class="label">Imagem</span></span>
-      <span><span class="label">3D</span></span>
-      <div class="toggle-underline"></div>
+      <div class="popup-toggle">
+        <span class="active"><span class="label">Imagem</span></span>
+        <span><span class="label">3D</span></span>
+        <div class="toggle-underline"></div>
+      </div>
     </div>
 
-    <div class="popup-image">
-      <img src="" alt="Imagem do prato" id="popup-img">
-      <model-viewer id="popup-3d" loading="eager" src="" ios-src="" camera-controls disable-pan disable-zoom
-        camera-orbit="0deg 53deg 0.55m" min-camera-orbit="auto 53deg 0.55m" max-camera-orbit="auto 53deg 0.55m"
-        camera-target="0m 0m 0m" style="display: none; width: 100%; height: 220px;" shadow-intensity="1"
-        shadow-softness="0.45">
-      </model-viewer>
-    </div>
-
+    <!-- Corpo do Popup com conteúdo rolável -->
     <div class="popup-content">
+      <div class="popup-image">
+        <img src="" alt="Imagem do prato" id="popup-img">
+        <model-viewer id="popup-3d" loading="eager" src="" ios-src="" camera-controls disable-pan disable-zoom
+          camera-orbit="0deg 53deg 0.53m" min-camera-orbit="auto 53deg 0.53m" max-camera-orbit="auto 53deg 0.53m"
+          camera-target="0m 0m 0m" style="display: none; width: 100%; height: 220px;" shadow-intensity="1"
+          shadow-softness="0.45">
+        </model-viewer>
+      </div>
+
       <h3 id="popup-title">[Nome do Prato]</h3>
       <div class="popup-meta">
         <img src="assets/images/star.png" class="popup-star" alt="Estrela">
@@ -119,42 +122,54 @@
 
       <p id="popup-description">[Descrição do prato...]</p>
 
+      <!-- Botão AR no conteúdo -->
       <button class="ar-btn" id="ar-btn">Ver Prato na Mesa com AR</button>
-
     </div>
   </div>
+
 
   <!-- Informaçoes Popup -->
 
   <div id="info-popup-overlay" class="info-popup-overlay hidden"></div>
 
   <div id="info-popup" class="info-popup hidden">
-    <h2>Informações:</h2>
-    <p class="sub">Projeto Final de Curso<br>Engenharia Informática IPB-ESTiG 24/25</p>
 
-    <div class="logo-row">
-      <img src="assets/images/logo.png" class="logo-icon" />
-      <span class="logo-text">Menu-AR</span>
+    <div class="popup-header">
+      <h2>Informações:</h2>
     </div>
 
-    <p class="dev">Desenvolvido por<br>Bruno Lobo e Gonçalo Lopes</p>
+    <div class="popup-content">
 
-    <div class="content-left">
-      <p class="section-title">Objetivo:</p>
-      <p class="objective-text">
-        Usar realidade aumentada (AR) na web, permitindo que os clientes visualizem os pratos antes de tomar a decisão.
-      </p>
+      <div class="project-info">
+        <p class="sub">Projeto Final de Curso<br>Engenharia Informática IPB-ESTiG 24/25</p>
 
-      <p class="section-title">Instruções:</p>
-      <p class="objective-text">
-        1) Escolha um prato.<br>
-        2) Pressione o botão de visualizar em AR.<br>
-        3) Aponte a câmara para a mesa e mova o telemóvel um pouco.
-      </p>
-      
+        <div class="logo-row">
+          <img src="assets/images/logo.png" class="logo-icon" />
+          <span class="logo-text">Menu-AR</span>
+        </div>
+
+        <p class="dev">Desenvolvido por<br>Bruno Lobo e Gonçalo Lopes</p>
+      </div>
+
+      <div class="content-left">
+        <p class="section-title">Objetivo:</p>
+        <p class="objective-text">
+          Usar realidade aumentada (AR) na web, permitindo que os clientes visualizem os pratos antes de tomar a
+          decisão.
+        </p>
+
+        <p class="section-title">Instruções:</p>
+        <p class="objective-text">
+          1) Escolha um prato.<br>
+          2) Pressione o botão de visualizar em AR.<br>
+          3) Aponte a câmara para a mesa e mova o telemóvel um pouco.
+        </p>
+      </div>
     </div>
 
-    <button class="closeBtn" id="close-info">Fechar</button>
+    <div class="popup-footer">
+      <button class="closeBtn" id="close-info">Fechar</button>
+    </div>
   </div>
 
 

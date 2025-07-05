@@ -166,12 +166,35 @@ function preventScroll(e) {
   e.preventDefault();
 }
 
+let isPopupOpen = false;
+
+function checkOrientation() {
+  if (!isPopupOpen) return;
+
+  if (window.innerWidth > window.innerHeight) {
+    enablePageScroll();
+  } else {
+    disablePageScroll();
+  }
+}
+
+window.addEventListener('resize', function () {
+  checkOrientation();
+});
+
+window.addEventListener('orientationchange', function () {
+  checkOrientation();
+});
 
 const popup = document.getElementById('dish-popup');
 const infoPopup = document.getElementById('info-popup')
 const overlay = document.getElementById('popup-overlay');
 
+
 function openPopup() {
+
+  isPopupOpen = true;
+  checkOrientation();
 
   popup.style.transform = 'translateY(100%)';
   overlay.classList.remove('hidden');
@@ -180,11 +203,12 @@ function openPopup() {
 
   popup.style.transition = 'transform 0.4s ease';
   popup.style.transform = 'translateY(0)';
-
-  disablePageScroll();
 }
 
 function closePopup() {
+
+  isPopupOpen = false;
+
   popup.style.transition = 'transform 0.4s ease';
   popup.style.transform = 'translateY(100%)';
 
@@ -196,13 +220,16 @@ function closePopup() {
   }
   updateUnderline(firstSpan);
 
-  popupImg.style.display = 'block';
   modelViewer.style.display = 'none';
+  popupImg.style.display = 'block';
 
   enablePageScroll();
 }
 
 function closeInfoPopup() {
+
+  isPopupOpen = false;
+
   infoPopup.style.transition = 'transform 0.4s ease';
   infoPopup.style.transform = 'translateX(107.5%)';
 
@@ -211,6 +238,10 @@ function closeInfoPopup() {
 }
 
 function openInfoPopup() {
+
+  isPopupOpen = true;
+  checkOrientation();
+
   infoPopup.classList.remove('hidden');
   overlay.classList.remove('hidden');
 
@@ -220,7 +251,6 @@ function openInfoPopup() {
 
   infoPopup.classList.add('open');
 
-  disablePageScroll();
 }
 
 overlay.addEventListener('click', closePopup);
