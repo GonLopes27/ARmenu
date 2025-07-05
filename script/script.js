@@ -34,6 +34,8 @@ const dishes = [
 
 
 let isScrollingProgrammatically = false;
+let startY = 0;
+let currentY = 0;
 
 function smoothScrollTo(targetY, duration = 600) {
   isScrollingProgrammatically = true;
@@ -164,89 +166,10 @@ function preventScroll(e) {
   e.preventDefault();
 }
 
-function showDishPopup(dishId) {
-  const dish = dishes.find(d => d.id === dishId);
-
-  if (dish) {
-    const overlay = document.getElementById("popup-overlay");
-    const popup = document.getElementById("dish-popup");
-
-    document.getElementById("popup-img").src = dish.image;
-    document.getElementById("popup-title").textContent = dish.name;
-    document.getElementById("popup-rating").textContent = dish.rating;
-    document.getElementById("popup-price").textContent = dish.price;
-    document.getElementById("popup-description").textContent = dish.description;
-
-    const modelViewer = document.getElementById("popup-3d");
-    modelViewer.setAttribute("src", dish.model);
-    modelViewer.setAttribute("ios-src", dish.modelIos);
-
-    popup.classList.remove("hidden");
-    overlay.classList.remove("hidden");
-
-    openPopup();
-    disablePageScroll();
-
-    setTimeout(() => {
-      const activeSpan = document.querySelector('.popup-toggle span.active');
-      if (activeSpan) updateUnderline(activeSpan);
-    }, 50);
-  }
-}
-
-let selectedDishId = null;
-
-document.querySelectorAll('.dish-card').forEach(card => {
-  card.addEventListener("click", () => {
-
-    selectedDishId = card.getAttribute('data-id');
-
-    showDishPopup(selectedDishId);
-  });
-});
-
-document.getElementById('ar-btn').addEventListener('click', () => {
-
-  if (!selectedDishId) {
-    console.error("Nenhum prato selecionado.");
-    return;
-  }
-
-  const dish = dishes.find(d => d.id === selectedDishId);
-
-  if (dish) {
-    const oldViewer = document.getElementById('ar-viewer');
-    if (oldViewer) {
-      oldViewer.remove();
-    }
-
-    const newViewer = document.createElement('model-viewer');
-    newViewer.setAttribute('id', 'ar-viewer');
-    newViewer.setAttribute('src', dish.model);
-    newViewer.setAttribute('ios-src', dish.modelIos);
-    newViewer.setAttribute('ar', '');
-    newViewer.setAttribute('ar-modes', 'scene-viewer quick-look webxr');
-    newViewer.setAttribute('camera-controls', '');
-    newViewer.style.display = 'none';
-
-    document.body.appendChild(newViewer);
-
-    newViewer.addEventListener('load', () => {
-      newViewer.activateAR();
-    });
-
-    setTimeout(() => {
-      newViewer.activateAR();
-    }, 100);
-  }
-});
 
 const popup = document.getElementById('dish-popup');
 const infoPopup = document.getElementById('info-popup')
 const overlay = document.getElementById('popup-overlay');
-
-let startY = 0;
-let currentY = 0;
 
 function openPopup() {
 
@@ -295,9 +218,12 @@ overlay.addEventListener('click', closePopup);
 overlay.addEventListener('click', closeInfoPopup);
 
 
+let selectedDishId = null;
+
 const toggleSpans = document.querySelectorAll('.popup-toggle span');
 const popupImg = document.getElementById('popup-img');
 const modelViewer = document.getElementById('popup-3d');
+const underline = document.querySelector('.toggle-underline');
 const infoBtn = document.getElementById('infoBtn')
 const closeBtn = document.getElementById('close-info')
 
@@ -318,9 +244,6 @@ toggleSpans.forEach((span, index) => {
     }
   });
 });
-
-
-const underline = document.querySelector('.toggle-underline');
 
 window.addEventListener('load', () => {
   const firstSpan = document.querySelector('.popup-toggle span');
@@ -371,17 +294,99 @@ toggleSpans.forEach(span => {
     span.classList.add('active');
     updateUnderline(span);
 
-    const popupImg = document.getElementById('popup-img');
-    const modelViewer = document.getElementById('popup-3d');
-
     if (span.textContent === 'Imagem') {
       popupImg.style.display = 'block';
       modelViewer.style.display = 'none';
+
+      modelViewer.removeAttribute('src');
+      modelViewer.removeAttribute('ios-src');
     } else {
       popupImg.style.display = 'none';
       modelViewer.style.display = 'block';
+
+      const dish = dishes.find(d => d.id === selectedDishId);
+
+      if (dish) {
+        modelViewer.setAttribute('src', dish.model);
+        modelViewer.setAttribute('ios-src', dish.modelIos);
+      }
     }
   });
 });
 
+function showDishPopup(dishId) {
+  const dish = dishes.find(d => d.id === dishId);
+
+  if (dish) {
+    const overlay = document.getElementById("popup-overlay");
+    const popup = document.getElementById("dish-popup");
+
+    document.getElementById("popup-img").src = dish.image;
+    document.getElementById("popup-title").textContent = dish.name;
+    document.getElementById("popup-rating").textContent = dish.rating;
+    document.getElementById("popup-price").textContent = dish.price;
+    document.getElementById("popup-description").textContent = dish.description;
+    
+
+    const modelViewer = document.getElementById("popup-3d");
+    modelViewer.setAttribute("src", dish.model);
+    modelViewer.setAttribute("ios-src", dish.modelIos);
+
+    popup.classList.remove("hidden");
+    overlay.classList.remove("hidden");
+
+    openPopup();
+    disablePageScroll();
+
+    setTimeout(() => {
+      const activeSpan = document.querySelector('.popup-toggle span.active');
+      if (activeSpan) updateUnderline(activeSpan);
+    }, 50);
+  }
+}
+
+document.querySelectorAll('.dish-card').forEach(card => {
+  card.addEventListener("click", () => {
+
+    selectedDishId = card.getAttribute('data-id');
+
+    showDishPopup(selectedDishId);
+  });
+});
+
+document.getElementById('ar-btn').addEventListener('click', () => {
+
+  if (!selectedDishId) {
+    console.error("Nenhum prato selecionado.");
+    return;
+  }
+
+  const dish = dishes.find(d => d.id === selectedDishId);
+
+  if (dish) {
+    const oldViewer = document.getElementById('ar-viewer');
+    if (oldViewer) {
+      oldViewer.remove();
+    }
+
+    const newViewer = document.createElement('model-viewer');
+    newViewer.setAttribute('id', 'ar-viewer');
+    newViewer.setAttribute('src', dish.model);
+    newViewer.setAttribute('ios-src', dish.modelIos);
+    newViewer.setAttribute('ar', '');
+    newViewer.setAttribute('ar-modes', 'scene-viewer quick-look webxr');
+    newViewer.setAttribute('camera-controls', '');
+    newViewer.style.display = 'none';
+
+    document.body.appendChild(newViewer);
+
+    newViewer.addEventListener('load', () => {
+      newViewer.activateAR();
+    });
+
+    setTimeout(() => {
+      newViewer.activateAR();
+    }, 100);
+  }
+});
 
