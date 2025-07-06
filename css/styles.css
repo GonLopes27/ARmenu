@@ -69,8 +69,18 @@ main {
   cursor:pointer;
 }
 
+.main-content {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
 
-/* SECÇÕES */
+.page-end-space {
+  flex-grow: 1;
+  height: 200px;
+  width: 100%;
+}
+
 h2[id^="secao-"] {
   scroll-margin-top: 100px;
   font-size: 14px;
@@ -91,9 +101,11 @@ h2[id^="secao-"]::after {
   margin-left: 0.5rem;
 }
 
+.section-end {
+  height: 0.5rem;
+  width: 100%;
+}
 
-
-/* NAVEGAÇÃO */
 .categoryBtns {
   width: 100%;
   max-width: 100%;
@@ -138,9 +150,6 @@ h2[id^="secao-"]::after {
   left: 0;
 }
 
-
-
-/* CARDS */
 .dish-card {
   all: unset;
   cursor: pointer;

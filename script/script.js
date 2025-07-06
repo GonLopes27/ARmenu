@@ -3,6 +3,7 @@ const dishes = [
   {
     id: "estrogonofe",
     name: 'Estrogonofe',
+    category: 'carne',
     image: './assets/images/EstrogonofeRender.png',
     rating: '4,5',
     price: '12,00€',
@@ -13,6 +14,7 @@ const dishes = [
   {
     id: "cachorro",
     name: 'Cachorro Especial',
+    category: 'carne',
     image: './assets/images/CachorroRendered.png',
     rating: '3,9',
     price: '8,50€',
@@ -23,6 +25,7 @@ const dishes = [
   {
     id: "douradinhos",
     name: 'Filetes de Pescada com Arroz',
+    category: 'peixe',
     image: './assets/images/DouradinhosRendered.png',
     rating: '3,0',
     price: '6,00€',
@@ -156,6 +159,93 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
+const dishContainer = document.getElementById('dish-container');
+
+function createDishCard(dish) {
+  const dishCard = document.createElement('div');
+  dishCard.classList.add('dish-card', 'padding-sm');
+  dishCard.setAttribute('data-id', dish.id);
+
+  const dishImage = document.createElement('img');
+  dishImage.src = dish.image;
+  dishImage.alt = dish.name;
+
+  const infoDiv = document.createElement('div');
+  infoDiv.classList.add('info');
+
+  const dishTitle = document.createElement('h3');
+  dishTitle.classList.add('dish-title');
+  dishTitle.textContent = dish.name;
+
+  const ratingPriceDiv = document.createElement('div');
+  ratingPriceDiv.classList.add('rating-price');
+
+  const starImg = document.createElement('img');
+  starImg.src = 'assets/images/star.png';
+  starImg.alt = 'Estrela';
+  starImg.classList.add('star');
+
+  const ratingSpan = document.createElement('span');
+  ratingSpan.classList.add('rating');
+  ratingSpan.textContent = dish.rating;
+
+  const dotCharSpan = document.createElement('span');
+  dotCharSpan.classList.add('dot-char');
+  dotCharSpan.textContent = '●';
+
+  const priceSpan = document.createElement('span');
+  priceSpan.classList.add('price');
+  priceSpan.textContent = dish.price;
+
+  ratingPriceDiv.appendChild(starImg);
+  ratingPriceDiv.appendChild(ratingSpan);
+  ratingPriceDiv.appendChild(dotCharSpan);
+  ratingPriceDiv.appendChild(priceSpan);
+
+  const descriptionP = document.createElement('p');
+  descriptionP.classList.add('description');
+  descriptionP.textContent = dish.description;
+
+  infoDiv.appendChild(dishTitle);
+  infoDiv.appendChild(ratingPriceDiv);
+  infoDiv.appendChild(descriptionP);
+
+  dishCard.appendChild(dishImage);
+  dishCard.appendChild(infoDiv);
+
+  return dishCard;
+}
+
+function loadDishesByCategory() {
+  const categories = ['carne', 'peixe', 'sobremesa'];
+
+  categories.forEach(category => {
+    const sectionTitle = document.createElement('h2');
+    sectionTitle.textContent = `Pratos de ${category.charAt(0).toUpperCase() + category.slice(1)}:`;
+    sectionTitle.setAttribute('id', `secao-${category}`);
+    sectionTitle.setAttribute('data-category', category);
+
+    const sectionDiv = document.createElement('div');
+    sectionDiv.classList.add(`category-${category}`);
+
+    const filteredDishes = dishes.filter(dish => dish.category === category);
+
+    filteredDishes.forEach(dish => {
+      const dishCard = createDishCard(dish);
+      sectionDiv.appendChild(dishCard);
+    });
+
+    dishContainer.appendChild(sectionTitle);
+    dishContainer.appendChild(sectionDiv);
+
+    const sectionEndDiv = document.createElement('div');
+    sectionEndDiv.classList.add('section-end');
+    sectionDiv.appendChild(sectionEndDiv);
+  });
+}
+
+loadDishesByCategory();
+
 let lastScrollY = window.scrollY;
 
 function disablePageScroll() {
@@ -191,12 +281,12 @@ window.addEventListener('orientationchange', function () {
 });
 
 const popup = document.getElementById('dish-popup');
-const infoPopup = document.getElementById('info-popup')
+const infoPopup = document.getElementById('info-popup');
 const overlay = document.getElementById('popup-overlay');
-
+const modelViewer = document.getElementById('popup-3d');
+const popupImg = document.getElementById('popup-img');
 
 function openPopup() {
-
   isPopupOpen = true;
   checkOrientation();
 
@@ -210,7 +300,6 @@ function openPopup() {
 }
 
 function closePopup() {
-
   isPopupOpen = false;
 
   popup.style.transition = 'transform 0.4s ease';
@@ -231,7 +320,6 @@ function closePopup() {
 }
 
 function closeInfoPopup() {
-
   isPopupOpen = false;
 
   infoPopup.style.transition = 'transform 0.4s ease';
@@ -242,7 +330,6 @@ function closeInfoPopup() {
 }
 
 function openInfoPopup() {
-
   isPopupOpen = true;
   checkOrientation();
 
@@ -253,8 +340,6 @@ function openInfoPopup() {
 
   infoPopup.style.transform = 'translateX(0%)';
 
-  infoPopup.classList.add('open');
-
 }
 
 overlay.addEventListener('click', closePopup);
@@ -264,8 +349,6 @@ overlay.addEventListener('click', closeInfoPopup);
 let selectedDishId = null;
 
 const toggleSpans = document.querySelectorAll('.popup-toggle span');
-const popupImg = document.getElementById('popup-img');
-const modelViewer = document.getElementById('popup-3d');
 const underline = document.querySelector('.toggle-underline');
 const infoBtn = document.getElementById('infoBtn')
 const closeBtn = document.getElementById('close-info')
@@ -297,8 +380,8 @@ window.addEventListener('load', () => {
 });
 
 function updateUnderline(target) {
-  // If the label is missing, use the span itself
-  const labelRect = target.getBoundingClientRect();  // Get the rect of the span itself
+
+  const labelRect = target.getBoundingClientRect();
   const parentRect = target.parentElement.getBoundingClientRect();
 
   const newLeft = labelRect.left - parentRect.left;
@@ -397,7 +480,7 @@ document.querySelectorAll('.dish-card').forEach(card => {
   });
 });
 
-function openDishAR(dishID){
+function openDishAR(dishID) {
 
   if (!dishID) {
     console.error("Nenhum prato selecionado.");
@@ -436,7 +519,7 @@ function openDishAR(dishID){
 document.getElementById('ar-btn').addEventListener('click', () => {
 
   openDishAR(selectedDishId);
-  
+
 });
 
 
@@ -452,4 +535,3 @@ const QRparam = params.get('prato');
 
 if (QRparam) openDishAR(QRparam);
 
- 
