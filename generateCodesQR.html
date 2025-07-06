@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Gerar Códigos QR</title>
+    <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
+</head>
+
+<body>
+    <div id="qrcode" style="display: flex; justify-content: space-around; margin: 2rem;"></div>
+
+
+    <script>
+        const dishesIds = ["estrogonofe", "cachorro", "douradinhos"];
+
+        dishesIds.map(d => {
+            const url = `http://gonlopes27.github.io/ARmenu/?prato=${d}`; // URL que o QR Code deve gerar
+
+            // Gera o QR code com a URL
+            new QRCode(document.getElementById("qrcode"), {
+                text: url,
+                width: 512,
+                height: 512,
+                colorDark: "#000000",
+                colorLight: "#ffffff",
+                correctLevel: QRCode.CorrectLevel.L
+            })
+        });
+    </script>
+
+</body>
+
+</html>

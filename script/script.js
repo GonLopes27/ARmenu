@@ -297,8 +297,8 @@ window.addEventListener('load', () => {
 });
 
 function updateUnderline(target) {
-  const label = target.querySelector('.label');
-  const labelRect = label.getBoundingClientRect();
+  // If the label is missing, use the span itself
+  const labelRect = target.getBoundingClientRect();  // Get the rect of the span itself
   const parentRect = target.parentElement.getBoundingClientRect();
 
   const newLeft = labelRect.left - parentRect.left;
@@ -369,7 +369,7 @@ function showDishPopup(dishId) {
     document.getElementById("popup-rating").textContent = dish.rating;
     document.getElementById("popup-price").textContent = dish.price;
     document.getElementById("popup-description").textContent = dish.description;
-    
+
 
     const modelViewer = document.getElementById("popup-3d");
     modelViewer.setAttribute("src", dish.model);
@@ -397,14 +397,14 @@ document.querySelectorAll('.dish-card').forEach(card => {
   });
 });
 
-document.getElementById('ar-btn').addEventListener('click', () => {
+function openDishAR(dishID){
 
-  if (!selectedDishId) {
+  if (!dishID) {
     console.error("Nenhum prato selecionado.");
     return;
   }
 
-  const dish = dishes.find(d => d.id === selectedDishId);
+  const dish = dishes.find(d => d.id === dishID);
 
   if (dish) {
     const oldViewer = document.getElementById('ar-viewer');
@@ -431,5 +431,25 @@ document.getElementById('ar-btn').addEventListener('click', () => {
       newViewer.activateAR();
     }, 100);
   }
+}
+
+document.getElementById('ar-btn').addEventListener('click', () => {
+
+  openDishAR(selectedDishId);
+  
 });
 
+
+function onExitAR() {
+  const url = new URL(window.location);
+  url.searchParams.delete('prato');
+
+  window.history.replaceState({}, document.title, url.toString());
+}
+
+const params = new URLSearchParams(window.location.search);
+const QRparam = params.get('prato');
+
+if (QRparam) openDishAR(QRparam);
+
+ 
