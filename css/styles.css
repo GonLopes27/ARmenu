@@ -69,18 +69,6 @@ main {
   cursor:pointer;
 }
 
-.main-content {
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-}
-
-.page-end-space {
-  flex-grow: 1;
-  height: 200px;
-  width: 100%;
-}
-
 h2[id^="secao-"] {
   scroll-margin-top: 100px;
   font-size: 14px;
@@ -103,6 +91,11 @@ h2[id^="secao-"]::after {
 
 .section-end {
   height: 0.5rem;
+  width: 100%;
+}
+
+.final-space {
+  height: 200px;
   width: 100%;
 }
 

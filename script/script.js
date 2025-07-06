@@ -237,12 +237,13 @@ function loadDishesByCategory() {
 
     dishContainer.appendChild(sectionTitle);
     dishContainer.appendChild(sectionDiv);
-
-    const sectionEndDiv = document.createElement('div');
-    sectionEndDiv.classList.add('section-end');
-    sectionDiv.appendChild(sectionEndDiv);
   });
+
+  const finalSpaceDiv = document.createElement('div');
+  finalSpaceDiv.classList.add('final-space');
+  dishContainer.appendChild(finalSpaceDiv);
 }
+
 
 loadDishesByCategory();
 
