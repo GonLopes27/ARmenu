@@ -37,12 +37,12 @@ const dishes = [
     id: "gateau",
     name: 'Petit Gâteau com Gelado',
     category: 'sobremesa',
-    image: './assets/images/gateauRender.png',
+    image: './assets/images/GateauRender.png',
     rating: '4,7',
     price: '4,00€',
     description: 'Pequeno Bolo de Chocolate e duas bolas de Gelado de Caramelo à parte.',
-    model: './assets/models/gateau.glb',
-    modelIos: './assets/models/gateau.usdz'
+    model: './assets/models/Gateau.glb',
+    modelIos: './assets/models/Gateau.usdz'
   }
 ];
 
