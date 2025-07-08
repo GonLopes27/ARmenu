@@ -32,6 +32,17 @@ const dishes = [
     description: 'Filetes de Pescada do Capitão Iglo servidos com arroz.',
     model: './assets/models/DouradinhosClean.glb',
     modelIos: './assets/models/DouradinhosClean.usdz'
+  },
+  {
+    id: "sobremesa",
+    name: 'Tarte de Maça',
+    category: 'sobremesa',
+    image: './assets/images/DouradinhosRendered.png',
+    rating: '5,0',
+    price: '6,00€',
+    description: 'Tarte de Maça Docinha typeshi.',
+    model: './assets/models/sobremesa.glb',
+    modelIos: './assets/models/sobremesa.usdz'
   }
 ];
 
