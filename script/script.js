@@ -5,9 +5,9 @@ const dishes = [
     name: 'Estrogonofe',
     category: 'carne',
     image: './assets/images/EstrogonofeRender.png',
-    rating: '4,5',
+    rating: '4,2',
     price: '12,00€',
-    description: 'Estrogonofe de carne com molho cremoso, acompanhado de arroz e batata frita.',
+    description: 'Estrogonofe de carne com molho cremoso, acompanhado de Arroz e Batata Frita.',
     model: './assets/models/Estrogonofe.glb',
     modelIos: './assets/models/Estrogonofe.usdz'
   },
@@ -15,10 +15,10 @@ const dishes = [
     id: "cachorro",
     name: 'Cachorro Especial',
     category: 'carne',
-    image: './assets/images/CachorroRendered.png',
-    rating: '3,9',
+    image: './assets/images/CachorroRender.png',
+    rating: '3,8',
     price: '8,50€',
-    description: 'Cachorro quente com molho de francesinha no Prato.',
+    description: 'Cachorro-Quente com molho de Francesinha no Prato.',
     model: './assets/models/Cachorro.glb',
     modelIos: './assets/models/Cachorro.usdz'
   },
@@ -26,23 +26,23 @@ const dishes = [
     id: "douradinhos",
     name: 'Filetes de Pescada com Arroz',
     category: 'peixe',
-    image: './assets/images/DouradinhosRendered.png',
-    rating: '3,0',
+    image: './assets/images/DouradinhosRender.png',
+    rating: '2,6',
     price: '6,00€',
-    description: 'Filetes de Pescada do Capitão Iglo servidos com arroz.',
+    description: 'Filetes de Pescada do Capitão Iglo servidos com Arroz.',
     model: './assets/models/DouradinhosClean.glb',
     modelIos: './assets/models/DouradinhosClean.usdz'
   },
   {
-    id: "sobremesa",
-    name: 'Tarte de Maça',
+    id: "gateau",
+    name: 'Petit Gâteau com Gelado',
     category: 'sobremesa',
-    image: './assets/images/DouradinhosRendered.png',
-    rating: '5,0',
-    price: '6,00€',
-    description: 'Tarte de Maça Docinha typeshi.',
-    model: './assets/models/sobremesa.glb',
-    modelIos: './assets/models/sobremesa.usdz'
+    image: './assets/images/gateauRender.png',
+    rating: '4,7',
+    price: '4,00€',
+    description: 'Pequeno Bolo de Chocolate e duas bolas de Gelado de Caramelo à parte.',
+    model: './assets/models/gateau.glb',
+    modelIos: './assets/models/gateau.usdz'
   }
 ];
 
