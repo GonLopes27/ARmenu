@@ -534,14 +534,6 @@ document.getElementById('ar-btn').addEventListener('click', () => {
 
 });
 
-
-function onExitAR() {
-  const url = new URL(window.location);
-  url.searchParams.delete('prato');
-
-  window.history.replaceState({}, document.title, url.toString());
-}
-
 const params = new URLSearchParams(window.location.search);
 const QRparam = params.get('prato');
 
